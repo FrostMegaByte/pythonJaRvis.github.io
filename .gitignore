@@ -6,4 +6,6 @@
 **/backup
 **/olddata
 /.history
-
+_site
+.sass-cache
+.jekyll-metadata

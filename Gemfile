@@ -8,7 +8,7 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 3.9.2"
+gem "jekyll", "~> 3.9.3"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 # gem "minima", "~> 2.0"
@@ -25,10 +25,22 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
+<<<<<<< HEAD
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
   gem "tzinfo", "~> 1.2"
   gem "tzinfo-data"
 end
+=======
+# install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+#   gem "tzinfo", "~> 1.2"
+#   gem "tzinfo-data"
+# end
+
+platforms :mingw, :x64_mingw, :mswin, :jruby do
+  gem "tzinfo", ">= 1", "< 3"
+  gem "tzinfo-data"
+  end
+>>>>>>> ba248a1f113c43f38464ae35208c79fa7f4d791a
 
 # Performance-booster for watching directories on Windows
 gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
@@ -41,4 +53,8 @@ gem "kramdown-parser-gfm"
 # do not have a Java counterpart.
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
+<<<<<<< HEAD
 gem "webrick", "~> 1.7"
+=======
+gem "webrick", "~> 1.8"
+>>>>>>> ba248a1f113c43f38464ae35208c79fa7f4d791a
