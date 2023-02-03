@@ -1,0 +1,8 @@
+**/venv
+**/.vscode
+**/.idea
+**/.history
+**/__pycache__
+**/backup
+**/olddata
+
