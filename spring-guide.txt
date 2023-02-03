@@ -1,0 +1,60 @@
+Building a RESTful Web Service
+    Learn how to create a RESTful web service with Spring.
+https://spring.io/guides/gs/rest-service/
+
+Consuming a RESTful Web Service
+    Learn how to retrieve web page data with Spring's RestTemplate.
+https://spring.io/guides/gs/consuming-rest/
+
+Building a RESTful Web Service with Spring Boot Actuator
+    Learn how to create a RESTful Web service with Spring Boot Actuator.
+https://spring.io/guides/gs/actuator-service/
+
+Securing a Web Application
+    Learn how to protect your web application with Spring Security.
+https://spring.io/guides/gs/securing-web/
+
+Building a Hypermedia-Driven RESTful Web Service
+    Learn how to create a hypermedia-driven RESTful Web service with Spring.
+https://spring.io/guides/gs/rest-hateoas/
+
+Serving Web Content with Spring MVC
+    Learn how to create a web page with Spring MVC and Thymeleaf.
+https://spring.io/guides/gs/serving-web-content/
+
+Handling Form Submission
+    Learn how to create and submit a web form with Spring.
+https://spring.io/guides/gs/handling-form-submission/
+
+Using WebSocket to build an interactive web application
+    Learn how to the send and receive messages between a browser and the server over a WebSocket
+https://spring.io/guides/gs/messaging-stomp-websocket/
+
+Consuming a RESTful Web Service with AngularJS
+    Learn how to retrieve web page data with AngularJS.
+https://spring.io/guides/gs/consuming-rest-angularjs/
+
+Consuming a RESTful Web Service with jQuery
+    Learn how to retrieve web page data with jQuery.
+https://spring.io/guides/gs/consuming-rest-jquery/
+
+Enabling Cross Origin Requests for a RESTful Web Service
+    Learn how to create a RESTful web service with Spring that support Cross-Origin Resource Sharing (CORS).
+https://spring.io/guides/gs/rest-service-cors/
+
+Consuming a SOAP web service
+    Learn how to create a client that consumes a WSDL-based service
+https://spring.io/guides/gs/consuming-web-service/
+
+Producing a SOAP web service
+    Learn how to create a SOAP-based web service with Spring.
+https://spring.io/guides/gs/producing-web-service/
+
+Testing the Web Layer
+    Learn how to test Spring Boot applications and MVC controllers.
+https://spring.io/guides/gs/testing-web/
+
+
+Building a Reactive RESTful Web Service
+    Learn how to create a RESTful web service with Reactive Spring and consume it with WebClient.
+https://spring.io/guides/gs/reactive-rest-service/
