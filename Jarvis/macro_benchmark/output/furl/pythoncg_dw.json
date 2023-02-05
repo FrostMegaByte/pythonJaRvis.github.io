@@ -1,0 +1,1429 @@
+{
+    "furl": [
+        "<builtin>.dict",
+        "furl.furl",
+        "<builtin>.globals",
+        "furl.__version__"
+    ],
+    "furl.furl": [
+        "furl.compat",
+        "furl.omdict1D",
+        "abc",
+        "six",
+        "furl.furl.static_vars.decorator",
+        "furl.furl.FragmentPathCompositionInterface",
+        "furl.furl.PathCompositionInterface",
+        "furl.furl.furl",
+        "posixpath",
+        "warnings",
+        "furl.furl.QueryCompositionInterface",
+        "furl.furl.FragmentCompositionInterface",
+        "copy",
+        "furl.furl.URLPathCompositionInterface",
+        "furl.common",
+        "furl.furl.Path",
+        "re.compile",
+        "re",
+        "furl.furl.Fragment",
+        "furl.furl.Query",
+        "furl.furl.static_vars",
+        "re.escape"
+    ],
+    "re": [
+        "sre_parse",
+        "sre_compile.compile",
+        "sre_compile",
+        "copyreg.pickle",
+        "functools.lru_cache.decorating_function",
+        "functools.lru_cache",
+        "functools._lru_cache_wrapper.wrapper",
+        "functools",
+        "<builtin>.globals",
+        "<builtin>.type",
+        "re.RegexFlag",
+        "enum",
+        "copyreg",
+        "<builtin>.chr",
+        "re.Scanner"
+    ],
+    "enum": [
+        "enum.auto",
+        "enum.IntEnum",
+        "enum.EnumMeta",
+        "enum.Flag",
+        "enum.Enum",
+        "types",
+        "<builtin>.object",
+        "enum.IntFlag",
+        "enum._EnumDict"
+    ],
+    "types": [
+        "types._g",
+        "types._cell_factory",
+        "types._C",
+        "types._GeneratorWrapper",
+        "types._ag",
+        "types.DynamicClassAttribute",
+        "types._c",
+        "<builtin>.type",
+        "<builtin>.globals",
+        "<builtin>.object"
+    ],
+    "<builtin>.type": [],
+    "types._cell_factory": [],
+    "types._g": [],
+    "types._c": [],
+    "types._ag": [],
+    "types._C": [],
+    "<builtin>.object": [],
+    "types.DynamicClassAttribute": [],
+    "types._GeneratorWrapper": [
+        "<builtin>.property"
+    ],
+    "<builtin>.property": [],
+    "<builtin>.globals": [],
+    "enum.auto": [],
+    "enum._EnumDict": [],
+    "enum.EnumMeta": [
+        "<builtin>.staticmethod",
+        "<builtin>.classmethod",
+        "<builtin>.property"
+    ],
+    "<builtin>.classmethod": [],
+    "<builtin>.staticmethod": [],
+    "enum.Enum": [
+        "<builtin>.classmethod",
+        "types.DynamicClassAttribute.__init__"
+    ],
+    "types.DynamicClassAttribute.__init__": [
+        "<builtin>.bool",
+        "<builtin>.getattr"
+    ],
+    "<builtin>.getattr": [],
+    "<builtin>.bool": [],
+    "enum.IntEnum": [],
+    "enum.Flag": [
+        "<builtin>.classmethod"
+    ],
+    "enum.IntFlag": [
+        "<builtin>.classmethod"
+    ],
+    "sre_compile": [
+        "sre_parse",
+        "sre_constants",
+        "<builtin>.tuple"
+    ],
+    "sre_parse": [
+        "sre_parse.State",
+        "sre_parse.Verbose",
+        "sre_parse.Tokenizer",
+        "<builtin>.frozenset",
+        "<builtin>.ord",
+        "sre_constants",
+        "sre_parse.SubPattern"
+    ],
+    "sre_constants": [
+        "sre_constants._NamedIntConstant",
+        "sre_constants._makecodes",
+        "sre_constants.error"
+    ],
+    "sre_constants.error": [],
+    "sre_constants._NamedIntConstant": [],
+    "sre_constants._makecodes": [
+        "<str>.strip",
+        "<str>.split",
+        "<builtin>.globals",
+        "<builtin>.enumerate"
+    ],
+    "<str>.strip": [],
+    "<str>.split": [],
+    "<builtin>.enumerate": [],
+    "<builtin>.frozenset": [],
+    "<builtin>.ord": [],
+    "sre_parse.Verbose": [],
+    "sre_parse.State": [
+        "<builtin>.property"
+    ],
+    "sre_parse.SubPattern": [],
+    "sre_parse.Tokenizer": [
+        "<builtin>.property"
+    ],
+    "<builtin>.tuple": [],
+    "functools": [
+        "collections.namedtuple",
+        "reprlib",
+        "functools._HashedSeq",
+        "functools.partialmethod",
+        "abc",
+        "functools.partial",
+        "<builtin>.object",
+        "collections",
+        "functools.singledispatchmethod",
+        "functools.cached_property"
+    ],
+    "abc": [
+        "abc.abstractstaticmethod",
+        "_py_abc",
+        "abc.ABC",
+        "abc.abstractclassmethod",
+        "abc.abstractproperty"
+    ],
+    "abc.abstractclassmethod": [],
+    "abc.abstractstaticmethod": [],
+    "abc.abstractproperty": [],
+    "_py_abc": [
+        "_py_abc.ABCMeta",
+        "_weakrefset"
+    ],
+    "_weakrefset": [
+        "_weakrefset._IterationGuard",
+        "_weakrefset.WeakSet"
+    ],
+    "_weakrefset._IterationGuard": [],
+    "_weakrefset.WeakSet": [],
+    "_py_abc.ABCMeta": [],
+    "abc.ABC": [],
+    "collections": [
+        "collections.UserString",
+        "reprlib",
+        "collections.ChainMap",
+        "collections.UserList",
+        "collections._OrderedDictKeysView",
+        "collections.OrderedDict",
+        "keyword",
+        "collections._OrderedDictValuesView",
+        "heapq",
+        "operator",
+        "collections.UserDict",
+        "collections._OrderedDictItemsView",
+        "collections.Counter",
+        "collections._Link"
+    ],
+    "operator": [
+        "operator.attrgetter",
+        "operator.methodcaller",
+        "operator.itemgetter"
+    ],
+    "operator.attrgetter": [],
+    "operator.itemgetter": [],
+    "operator.methodcaller": [],
+    "keyword": [
+        "<builtin>.frozenset"
+    ],
+    "heapq": [
+        "_heapq"
+    ],
+    "_heapq": [],
+    "reprlib": [
+        "reprlib.Repr.__init__",
+        "reprlib.Repr"
+    ],
+    "reprlib.Repr": [],
+    "reprlib.Repr.__init__": [],
+    "collections._OrderedDictKeysView": [],
+    "collections._OrderedDictItemsView": [],
+    "collections._OrderedDictValuesView": [],
+    "collections._Link": [],
+    "collections.OrderedDict": [
+        "<builtin>.object",
+        "reprlib.recursive_repr.decorating_function",
+        "<builtin>.classmethod",
+        "reprlib.recursive_repr"
+    ],
+    "reprlib.recursive_repr": [],
+    "reprlib.recursive_repr.decorating_function": [
+        "<builtin>.set",
+        "<builtin>.getattr"
+    ],
+    "<builtin>.set": [],
+    "collections.Counter": [
+        "<builtin>.classmethod"
+    ],
+    "collections.ChainMap": [
+        "reprlib.recursive_repr.decorating_function",
+        "<builtin>.classmethod",
+        "<builtin>.property",
+        "reprlib.recursive_repr"
+    ],
+    "collections.UserDict": [
+        "<builtin>.classmethod"
+    ],
+    "collections.UserList": [],
+    "collections.UserString": [],
+    "functools.partial": [
+        "reprlib.recursive_repr.decorating_function",
+        "reprlib.recursive_repr"
+    ],
+    "functools.partialmethod": [
+        "<builtin>.property"
+    ],
+    "collections.namedtuple": [
+        "<builtin>.repr",
+        "<builtin>.isinstance",
+        "<builtin>.list",
+        "collections.<lambda1>",
+        "<str>.join",
+        "<builtin>.str",
+        "<builtin>.set",
+        "<builtin>.zip",
+        "<builtin>.tuple",
+        "<builtin>.reversed",
+        "<builtin>.TypeError",
+        "<builtin>.enumerate",
+        "<builtin>.len",
+        "<builtin>.type",
+        "<str>.split",
+        "<builtin>.classmethod",
+        "<builtin>.ValueError",
+        "<builtin>.map",
+        "<str>.replace",
+        "<builtin>.dict",
+        "<builtin>.exec",
+        "_collections._tuplegetter"
+    ],
+    "<builtin>.isinstance": [],
+    "<builtin>.map": [],
+    "<builtin>.list": [],
+    "<builtin>.str": [],
+    "<builtin>.TypeError": [],
+    "<builtin>.ValueError": [],
+    "<builtin>.len": [],
+    "<builtin>.reversed": [],
+    "<builtin>.zip": [],
+    "<builtin>.dict": [],
+    "<builtin>.repr": [],
+    "<str>.join": [],
+    "<builtin>.exec": [],
+    "_collections._tuplegetter": [],
+    "collections.<lambda1>": [
+        "operator.itemgetter.__init__",
+        "<builtin>.property"
+    ],
+    "operator.itemgetter.__init__": [],
+    "functools._HashedSeq": [],
+    "functools.singledispatchmethod": [
+        "<builtin>.property"
+    ],
+    "functools.cached_property": [],
+    "re.RegexFlag": [],
+    "<builtin>.chr": [],
+    "sre_compile.compile": [
+        "sre_parse.parse",
+        "sre_compile.dis",
+        "<builtin>.tuple",
+        "sre_compile._code",
+        "<map>.items",
+        "sre_compile.isstring",
+        "<builtin>.print"
+    ],
+    "sre_compile.isstring": [
+        "<builtin>.isinstance"
+    ],
+    "sre_parse.parse": [
+        "sre_parse.fix_flags",
+        "sre_parse.Tokenizer.error",
+        "sre_parse._parse_sub",
+        "sre_parse.Tokenizer.__init__",
+        "sre_parse.Tokenizer.seek",
+        "sre_parse.State.__init__",
+        "sre_parse.SubPattern.dump"
+    ],
+    "sre_parse.Tokenizer.__init__": [
+        "<builtin>.str",
+        "sre_parse.Tokenizer.__next",
+        "<builtin>.isinstance"
+    ],
+    "sre_parse.Tokenizer.__next": [
+        "<builtin>.len",
+        "sre_parse.Tokenizer.error"
+    ],
+    "sre_parse.Tokenizer.error": [
+        "sre_parse.Tokenizer.tell",
+        "sre_parse.Tokenizer.error"
+    ],
+    "sre_parse.Tokenizer.tell": [
+        "<builtin>.len"
+    ],
+    "sre_parse.State.__init__": [],
+    "sre_parse._parse_sub": [
+        "sre_parse.Tokenizer.match",
+        "<builtin>.len",
+        "<list>.append",
+        "<list>.extend",
+        "sre_parse.Tokenizer.tell",
+        "sre_parse.SubPattern.append",
+        "sre_parse.SubPattern.__init__",
+        "<list>"
+    ],
+    "<list>": [],
+    "sre_parse.Tokenizer.match": [
+        "sre_parse.Tokenizer.__next"
+    ],
+    "sre_parse.SubPattern.__init__": [],
+    "<list>.extend": [],
+    "<list>.append": [],
+    "sre_parse.SubPattern.append": [
+        "<list>.append"
+    ],
+    "sre_parse.Tokenizer.seek": [
+        "sre_parse.Tokenizer.__next"
+    ],
+    "sre_parse.fix_flags": [
+        "<builtin>.isinstance",
+        "<builtin>.ValueError"
+    ],
+    "sre_parse.SubPattern.dump": [
+        "<builtin>.str",
+        "<builtin>.isinstance",
+        "<builtin>.print",
+        "<builtin>.enumerate"
+    ],
+    "<builtin>.print": [],
+    "sre_compile._code": [
+        "<list>.append",
+        "sre_compile._compile_info",
+        "sre_compile._compile"
+    ],
+    "sre_compile._compile_info": [
+        "sre_compile._get_literal_prefix",
+        "sre_parse.SubPattern.getwidth",
+        "sre_compile._optimize_charset",
+        "<builtin>.len",
+        "sre_compile._compile_charset",
+        "<list>.extend",
+        "<list>",
+        "sre_compile._get_charset_prefix"
+    ],
+    "sre_parse.SubPattern.getwidth": [
+        "<builtin>.min",
+        "<builtin>.max"
+    ],
+    "<builtin>.min": [],
+    "<builtin>.max": [],
+    "sre_compile._get_literal_prefix": [
+        "sre_compile._get_literal_prefix",
+        "<list>",
+        "sre_compile._combine_flags",
+        "<builtin>.len",
+        "<list>.extend",
+        "sre_compile._get_iscased"
+    ],
+    "sre_compile._get_iscased": [],
+    "sre_compile._combine_flags": [],
+    "sre_compile._get_charset_prefix": [
+        "<builtin>.map",
+        "<list>",
+        "<builtin>.range",
+        "sre_compile._combine_flags",
+        "<builtin>.any",
+        "sre_compile._get_iscased"
+    ],
+    "<builtin>.range": [],
+    "<builtin>.any": [],
+    "sre_compile._optimize_charset": [
+        "<builtin>.map",
+        "<builtin>.bytes",
+        "<builtin>.range",
+        "sre_compile._bytes_to_codes",
+        "<builtin>.len",
+        "<list>.append",
+        "sre_compile._mk_bitmap",
+        "<builtin>.bytearray",
+        "<builtin>.any"
+    ],
+    "<builtin>.bytearray": [],
+    "sre_compile._mk_bitmap": [
+        "<builtin>.range",
+        "<builtin>.len"
+    ],
+    "<builtin>.bytes": [],
+    "sre_compile._bytes_to_codes": [
+        "<builtin>.len",
+        "<builtin>.memoryview"
+    ],
+    "<builtin>.memoryview": [],
+    "sre_compile._compile_charset": [
+        "<list>.extend",
+        "sre_constants.error.__init__",
+        "<list>"
+    ],
+    "sre_constants.error.__init__": [
+        "<builtin>.isinstance",
+        "<builtin>.super"
+    ],
+    "<builtin>.super": [],
+    "sre_compile._compile": [
+        "<map>.get",
+        "sre_compile._optimize_charset",
+        "sre_compile._combine_flags",
+        "sre_compile._compile_charset",
+        "sre_constants.error.__init__",
+        "sre_compile._simple",
+        "<list>",
+        "sre_compile._compile"
+    ],
+    "<map>.get": [],
+    "sre_compile._simple": [
+        "sre_compile._simple",
+        "<builtin>.len"
+    ],
+    "sre_compile.dis": [
+        "<builtin>.str",
+        "<builtin>.len",
+        "<builtin>.set",
+        "sre_compile.dis.dis_"
+    ],
+    "sre_compile.dis.dis_": [
+        "<builtin>.str",
+        "sre_compile.dis.dis_.print_2",
+        "<builtin>.map",
+        "sre_compile.dis.dis_",
+        "sre_compile._hex_code",
+        "<builtin>.range",
+        "<builtin>.list",
+        "<builtin>.bin",
+        "<builtin>.chr",
+        "sre_compile.dis.dis_.print_",
+        "<builtin>.ValueError"
+    ],
+    "<builtin>.bin": [],
+    "sre_compile.dis.dis_.print_": [
+        "<builtin>.print"
+    ],
+    "sre_compile.dis.dis_.print_2": [
+        "<builtin>.print"
+    ],
+    "sre_compile._hex_code": [],
+    "<map>.items": [],
+    "functools.lru_cache": [
+        "<builtin>.TypeError",
+        "functools._lru_cache_wrapper",
+        "<builtin>.isinstance",
+        "functools.update_wrapper",
+        "<builtin>.callable"
+    ],
+    "<builtin>.callable": [],
+    "functools._lru_cache_wrapper": [
+        "<builtin>.object",
+        "_thread.RLock"
+    ],
+    "_thread.RLock": [],
+    "functools.update_wrapper": [
+        "<builtin>.getattr"
+    ],
+    "functools.lru_cache.decorating_function": [
+        "functools._lru_cache_wrapper",
+        "functools.update_wrapper"
+    ],
+    "functools._lru_cache_wrapper.wrapper": [
+        "re._compile_repl",
+        "functools._make_key"
+    ],
+    "functools._make_key": [
+        "<builtin>.tuple",
+        "functools._HashedSeq.__init__",
+        "<builtin>.len",
+        "<builtin>.type"
+    ],
+    "functools._HashedSeq.__init__": [
+        "<builtin>.hash"
+    ],
+    "<builtin>.hash": [],
+    "re._compile_repl": [
+        "sre_parse.parse_template"
+    ],
+    "sre_parse.parse_template": [
+        "sre_parse.Tokenizer.error",
+        "<builtin>.int",
+        "sre_parse.Tokenizer.match",
+        "sre_parse.Tokenizer.__init__",
+        "sre_parse.parse_template.addgroup",
+        "<builtin>.isinstance",
+        "<builtin>.len",
+        "<list>.append",
+        "sre_parse.Tokenizer.get",
+        "<str>.isidentifier",
+        "<builtin>.chr",
+        "<builtin>.IndexError",
+        "sre_parse.Tokenizer.getuntil",
+        "<list>"
+    ],
+    "sre_parse.Tokenizer.get": [
+        "sre_parse.Tokenizer.__next"
+    ],
+    "<builtin>.int": [],
+    "sre_parse.parse_template.addgroup": [
+        "sre_parse.Tokenizer.error",
+        "<list>.append"
+    ],
+    "sre_parse.Tokenizer.getuntil": [
+        "sre_parse.Tokenizer.__next",
+        "<builtin>.len",
+        "sre_parse.Tokenizer.error"
+    ],
+    "<str>.isidentifier": [],
+    "<builtin>.IndexError": [],
+    "copyreg": [],
+    "copyreg.pickle": [
+        "<builtin>.TypeError",
+        "copyreg.constructor",
+        "<builtin>.callable"
+    ],
+    "copyreg.constructor": [
+        "<builtin>.TypeError",
+        "<builtin>.callable"
+    ],
+    "re.Scanner": [],
+    "warnings": [
+        "warnings._processoptions",
+        "warnings.simplefilter",
+        "<builtin>.hasattr",
+        "warnings.filterwarnings",
+        "warnings._OptionError",
+        "warnings.WarningMessage",
+        "warnings.catch_warnings"
+    ],
+    "warnings._OptionError": [],
+    "warnings.WarningMessage": [],
+    "warnings.catch_warnings": [],
+    "warnings._processoptions": [
+        "warnings._setoption",
+        "<builtin>.print"
+    ],
+    "warnings._setoption": [
+        "warnings._getcategory",
+        "<builtin>.int",
+        "<builtin>.len",
+        "warnings.filterwarnings",
+        "warnings._getaction",
+        "re",
+        "re.escape"
+    ],
+    "warnings._getaction": [],
+    "warnings._getcategory": [
+        "<builtin>.__import__",
+        "<builtin>.issubclass",
+        "<builtin>.getattr"
+    ],
+    "<builtin>.__import__": [],
+    "<builtin>.issubclass": [],
+    "re.escape": [
+        "<builtin>.str",
+        "<str>.encode",
+        "<builtin>.isinstance",
+        "<str>.translate"
+    ],
+    "warnings.filterwarnings": [
+        "<builtin>.isinstance",
+        "re.compile",
+        "<builtin>.issubclass",
+        "re",
+        "warnings._add_filter"
+    ],
+    "re.compile": [
+        "re._compile"
+    ],
+    "re._compile": [
+        "sre_compile.compile",
+        "<builtin>.TypeError",
+        "<builtin>.iter",
+        "<builtin>.next",
+        "<builtin>.isinstance",
+        "<builtin>.len",
+        "<builtin>.type",
+        "sre_compile.isstring",
+        "<builtin>.ValueError"
+    ],
+    "<builtin>.iter": [],
+    "<builtin>.next": [],
+    "warnings._add_filter": [
+        "<list>.insert",
+        "<list>.remove",
+        "warnings._filters_mutated",
+        "<list>.append"
+    ],
+    "<list>.remove": [],
+    "<list>.insert": [],
+    "warnings._filters_mutated": [],
+    "<builtin>.hasattr": [],
+    "warnings.simplefilter": [
+        "<builtin>.isinstance",
+        "warnings._add_filter"
+    ],
+    "copy": [
+        "<builtin>.type",
+        "types",
+        "copyreg",
+        "copy.Error",
+        "<builtin>.getattr",
+        "weakref"
+    ],
+    "weakref": [
+        "weakref.WeakKeyDictionary",
+        "weakref.WeakValueDictionary",
+        "_weakrefset",
+        "weakref.KeyedRef",
+        "weakref.WeakMethod",
+        "weakref.finalize"
+    ],
+    "weakref.WeakMethod": [],
+    "weakref.WeakValueDictionary": [],
+    "weakref.KeyedRef": [],
+    "weakref.WeakKeyDictionary": [],
+    "weakref.finalize": [
+        "<builtin>.property",
+        "weakref.finalize._Info",
+        "<builtin>.classmethod"
+    ],
+    "weakref.finalize._Info": [],
+    "copy.Error": [],
+    "posixpath": [
+        "stat",
+        "os",
+        "genericpath"
+    ],
+    "os": [
+        "<builtin>.ImportError",
+        "stat",
+        "<builtin>.set",
+        "os._add",
+        "os._wrap_close",
+        "os._exists",
+        "os._createenviron",
+        "os._Environ",
+        "<list>.append",
+        "<builtin>.globals",
+        "<list>.extend",
+        "os._fscodec",
+        "ntpath",
+        "abc",
+        "posixpath",
+        "os.PathLike",
+        "os._Environ.__init__",
+        "os._AddedDllDirectory"
+    ],
+    "stat": [],
+    "<builtin>.ImportError": [],
+    "ntpath": [
+        "<builtin>.hasattr",
+        "stat",
+        "os",
+        "genericpath"
+    ],
+    "genericpath": [
+        "stat",
+        "os"
+    ],
+    "os._exists": [
+        "<builtin>.globals"
+    ],
+    "os._add": [],
+    "os._Environ": [],
+    "os._createenviron": [
+        "os._createenviron.encodekey",
+        "os._Environ.__init__"
+    ],
+    "os._createenviron.encodekey": [
+        "os._createenviron.encode"
+    ],
+    "os._createenviron.encode": [
+        "<builtin>.isinstance",
+        "<builtin>.TypeError",
+        "<builtin>.type"
+    ],
+    "os._Environ.__init__": [],
+    "os._fscodec": [],
+    "os._wrap_close": [],
+    "os.PathLike": [
+        "<builtin>.classmethod",
+        "abc.abstractmethod"
+    ],
+    "abc.abstractmethod": [],
+    "os._AddedDllDirectory": [],
+    "six": [
+        "six.X",
+        "<builtin>.isinstance",
+        "six.MovedAttribute",
+        "<builtin>.globals",
+        "__future__",
+        "six._SixMetaPathImporter",
+        "six.Module_six_moves_urllib_robotparser",
+        "operator.attrgetter.__init__",
+        "six._LazyModule",
+        "io",
+        "six._SixMetaPathImporter._add_module",
+        "struct",
+        "operator.itemgetter.__init__",
+        "<builtin>.getattr",
+        "operator",
+        "six.exec_",
+        "six.Module_six_moves_urllib_error",
+        "six.Iterator",
+        "six._SixMetaPathImporter.__init__",
+        "six.Module_six_moves_urllib_parse",
+        "<builtin>.enumerate",
+        "six.Module_six_moves_urllib_response",
+        "<builtin>.len",
+        "six.MovedModule",
+        "six.Module_six_moves_urllib",
+        "<builtin>.type",
+        "types",
+        "importlib.util",
+        "six._MovedItems",
+        "<builtin>.setattr",
+        "<builtin>.int",
+        "functools",
+        "six.Module_six_moves_urllib_request",
+        "six._LazyDescr",
+        "six._add_doc",
+        "operator.methodcaller.__init__"
+    ],
+    "__future__": [
+        "__future__._Feature.__init__",
+        "__future__._Feature"
+    ],
+    "__future__._Feature": [],
+    "__future__._Feature.__init__": [],
+    "six.X": [],
+    "importlib.util": [
+        "warnings",
+        "importlib.util._LazyModule",
+        "importlib.util.LazyLoader",
+        "functools",
+        "types",
+        "contextlib",
+        "contextlib.contextmanager"
+    ],
+    "contextlib": [
+        "contextlib.AbstractContextManager",
+        "abc",
+        "contextlib.AsyncExitStack",
+        "contextlib.ContextDecorator",
+        "contextlib._BaseExitStack",
+        "contextlib.closing",
+        "contextlib._GeneratorContextManager",
+        "contextlib.AbstractAsyncContextManager",
+        "contextlib.ExitStack",
+        "contextlib._RedirectStream",
+        "contextlib._AsyncGeneratorContextManager",
+        "types",
+        "collections",
+        "contextlib.redirect_stdout",
+        "contextlib.suppress",
+        "contextlib.redirect_stderr",
+        "functools",
+        "contextlib._GeneratorContextManagerBase",
+        "contextlib.nullcontext"
+    ],
+    "contextlib.AbstractContextManager": [
+        "<builtin>.classmethod",
+        "abc.abstractmethod"
+    ],
+    "contextlib.AbstractAsyncContextManager": [
+        "<builtin>.classmethod",
+        "abc.abstractmethod"
+    ],
+    "contextlib.ContextDecorator": [],
+    "contextlib._GeneratorContextManagerBase": [],
+    "contextlib._GeneratorContextManager": [],
+    "contextlib._AsyncGeneratorContextManager": [],
+    "contextlib.closing": [],
+    "contextlib._RedirectStream": [],
+    "contextlib.redirect_stdout": [],
+    "contextlib.redirect_stderr": [],
+    "contextlib.suppress": [],
+    "contextlib._BaseExitStack": [
+        "<builtin>.staticmethod"
+    ],
+    "contextlib.ExitStack": [],
+    "contextlib.AsyncExitStack": [
+        "<builtin>.staticmethod"
+    ],
+    "contextlib.nullcontext": [],
+    "contextlib.contextmanager": [
+        "functools.wraps"
+    ],
+    "functools.wraps": [],
+    "importlib.util._LazyModule": [],
+    "importlib.util.LazyLoader": [
+        "<builtin>.staticmethod",
+        "<builtin>.classmethod"
+    ],
+    "six._LazyDescr": [],
+    "six.MovedModule": [],
+    "six._LazyModule": [],
+    "six.MovedAttribute": [],
+    "six._SixMetaPathImporter": [],
+    "six._SixMetaPathImporter.__init__": [],
+    "six._MovedItems": [],
+    "<builtin>.setattr": [],
+    "six._SixMetaPathImporter._add_module": [],
+    "six.Module_six_moves_urllib_parse": [],
+    "six.Module_six_moves_urllib_error": [],
+    "six.Module_six_moves_urllib_request": [],
+    "six.Module_six_moves_urllib_response": [],
+    "six.Module_six_moves_urllib_robotparser": [],
+    "six.Module_six_moves_urllib": [
+        "six._SixMetaPathImporter._get_module"
+    ],
+    "six._SixMetaPathImporter._get_module": [],
+    "six.Iterator": [],
+    "six._add_doc": [],
+    "operator.attrgetter.__init__": [
+        "<builtin>.map",
+        "<builtin>.TypeError",
+        "<builtin>.tuple",
+        "<builtin>.isinstance",
+        "<str>.split"
+    ],
+    "operator.methodcaller.__init__": [
+        "<builtin>.isinstance",
+        "<builtin>.TypeError"
+    ],
+    "struct": [
+        "_struct"
+    ],
+    "_struct": [],
+    "io": [
+        "io.BufferedIOBase",
+        "abc",
+        "io.RawIOBase",
+        "io.TextIOBase",
+        "io.IOBase"
+    ],
+    "io.IOBase": [],
+    "io.RawIOBase": [],
+    "io.BufferedIOBase": [],
+    "io.TextIOBase": [],
+    "six.exec_": [
+        "<builtin>.exec"
+    ],
+    "furl.omdict1D": [
+        "furl.omdict1D.omdict1D",
+        "furl.common",
+        "orderedmultidict"
+    ],
+    "orderedmultidict": [
+        "orderedmultidict.orderedmultidict",
+        "posixpath.join",
+        "<builtin>.dict",
+        "<builtin>.globals",
+        "<map>.items",
+        "posixpath.dirname",
+        "<builtin>.open",
+        "posixpath",
+        "<builtin>.exec"
+    ],
+    "orderedmultidict.orderedmultidict": [
+        "collections.abc",
+        "orderedmultidict.orderedmultidict.omdict",
+        "<builtin>.object",
+        "__future__",
+        "six",
+        "collections",
+        "orderedmultidict.itemlist"
+    ],
+    "orderedmultidict.itemlist": [
+        "orderedmultidict.itemlist.itemnode",
+        "<builtin>.object",
+        "__future__",
+        "orderedmultidict.itemlist.itemlist"
+    ],
+    "orderedmultidict.itemlist.itemnode": [],
+    "orderedmultidict.itemlist.itemlist": [],
+    "collections.abc": [
+        "collections.abc"
+    ],
+    "orderedmultidict.orderedmultidict.omdict": [
+        "<builtin>.classmethod"
+    ],
+    "posixpath.dirname": [
+        "os._fspath",
+        "<builtin>.len",
+        "posixpath._get_sep"
+    ],
+    "os._fspath": [
+        "<builtin>.TypeError",
+        "<str>.format",
+        "<builtin>.isinstance",
+        "<builtin>.hasattr",
+        "<builtin>.type"
+    ],
+    "<str>.format": [],
+    "posixpath._get_sep": [
+        "<builtin>.isinstance"
+    ],
+    "posixpath.join": [
+        "os._fspath",
+        "<builtin>.map",
+        "genericpath._check_arg_types",
+        "posixpath._get_sep"
+    ],
+    "genericpath._check_arg_types": [
+        "<builtin>.isinstance",
+        "<builtin>.TypeError"
+    ],
+    "<builtin>.open": [],
+    "furl.common": [
+        "<builtin>.object",
+        "furl.compat"
+    ],
+    "furl.compat": [
+        "collections",
+        "furl.compat.UnicodeMixin",
+        "<builtin>.list"
+    ],
+    "furl.compat.UnicodeMixin": [],
+    "furl.omdict1D.omdict1D": [],
+    "<str>.translate": [],
+    "<str>.encode": [],
+    "furl.furl.static_vars": [],
+    "furl.furl.static_vars.decorator": [
+        "<builtin>.setattr",
+        "six.iteritems"
+    ],
+    "six.iteritems": [],
+    "furl.furl.Path": [
+        "<builtin>.property"
+    ],
+    "furl.furl.PathCompositionInterface": [
+        "<builtin>.property",
+        "abc.abstractmethod"
+    ],
+    "furl.furl.URLPathCompositionInterface": [],
+    "furl.furl.FragmentPathCompositionInterface": [],
+    "furl.furl.Query": [
+        "<builtin>.property"
+    ],
+    "furl.furl.QueryCompositionInterface": [
+        "<builtin>.property"
+    ],
+    "furl.furl.Fragment": [],
+    "furl.furl.FragmentCompositionInterface": [
+        "<builtin>.property"
+    ],
+    "furl.furl.furl": [
+        "<builtin>.property"
+    ],
+    "furl.__version__": [],
+    "furl.furl.Fragment.__repr__": [
+        "<builtin>.str"
+    ],
+    "furl.furl.furl.__repr__": [
+        "<builtin>.str"
+    ],
+    "furl.furl.furl.__truediv__": [
+        "furl.furl.furl.copy"
+    ],
+    "furl.furl.furl.copy": [],
+    "furl.furl.Path.__eq__": [
+        "<builtin>.str"
+    ],
+    "furl.furl.Path.__truediv__": [
+        "copy.deepcopy",
+        "furl.furl.Path.add"
+    ],
+    "copy.deepcopy": [
+        "copy._deepcopy_atomic",
+        "<builtin>.id",
+        "<map>.get",
+        "copy._reconstruct",
+        "<map>",
+        "<builtin>.isinstance",
+        "<builtin>.type",
+        "copy._keep_alive",
+        "<builtin>.issubclass",
+        "<builtin>.getattr"
+    ],
+    "<builtin>.id": [],
+    "<map>": [],
+    "copy._reconstruct": [
+        "<builtin>.id",
+        "<builtin>.isinstance",
+        "<builtin>.len",
+        "<builtin>.hasattr",
+        "copy.deepcopy",
+        "<builtin>.setattr"
+    ],
+    "copy._deepcopy_atomic": [],
+    "copy._keep_alive": [
+        "<builtin>.id"
+    ],
+    "furl.furl.Path.add": [
+        "furl.furl.quacks_like_a_path_with_segments",
+        "furl.common.is_iterable_but_not_string",
+        "furl.furl.Path._segments_from_path",
+        "furl.furl.Path.load",
+        "furl.furl.join_path_segments"
+    ],
+    "furl.furl.quacks_like_a_path_with_segments": [
+        "<builtin>.hasattr",
+        "furl.common.is_iterable_but_not_string"
+    ],
+    "furl.common.is_iterable_but_not_string": [
+        "<builtin>.isinstance",
+        "furl.common.callable_attr"
+    ],
+    "furl.common.callable_attr": [
+        "<builtin>.hasattr",
+        "<builtin>.callable",
+        "<builtin>.getattr"
+    ],
+    "furl.furl.Path._segments_from_path": [
+        "furl.furl.is_valid_encoded_path_segment",
+        "warnings.warn",
+        "furl.furl.Path._path_from_segments",
+        "furl.furl.utf8",
+        "six.moves.urllib.parse.unquote",
+        "<builtin>.isinstance",
+        "<list>.append",
+        "<str>.split",
+        "six.moves.urllib.parse.quote"
+    ],
+    "furl.furl.is_valid_encoded_path_segment": [],
+    "furl.furl.utf8": [],
+    "six.moves.urllib.parse.quote": [],
+    "furl.furl.Path._path_from_segments": [
+        "six.moves.urllib.parse.quote",
+        "furl.furl.utf8",
+        "furl.furl.attemptstr"
+    ],
+    "furl.furl.attemptstr": [
+        "<builtin>.str"
+    ],
+    "warnings.warn": [
+        "<builtin>.TypeError",
+        "<builtin>.isinstance",
+        "<builtin>.range",
+        "warnings._next_external_frame",
+        "warnings.warn_explicit",
+        "<builtin>.type",
+        "<builtin>.issubclass",
+        "warnings._is_internal_frame"
+    ],
+    "warnings._is_internal_frame": [],
+    "warnings._next_external_frame": [
+        "warnings._is_internal_frame"
+    ],
+    "warnings.warn_explicit": [
+        "<builtin>.str",
+        "<map>.get",
+        "<builtin>.int",
+        "linecache",
+        "<map>.clear",
+        "<builtin>.isinstance",
+        "warnings._showwarnmsg",
+        "<builtin>.issubclass",
+        "linecache.getlines",
+        "warnings.WarningMessage.__init__",
+        "<builtin>.RuntimeError"
+    ],
+    "<map>.clear": [],
+    "linecache": [
+        "functools",
+        "os",
+        "tokenize"
+    ],
+    "tokenize": [
+        "io",
+        "collections.namedtuple",
+        "<builtin>.map",
+        "tokenize.TokenError",
+        "codecs",
+        "<builtin>.sorted",
+        "<builtin>.set",
+        "tokenize.Untokenizer",
+        "token",
+        "tokenize._all_string_prefixes",
+        "tokenize.maybe",
+        "tokenize.group",
+        "re.compile",
+        "re",
+        "tokenize.StopTokenizing",
+        "<builtin>.any",
+        "collections",
+        "tokenize.TokenInfo"
+    ],
+    "codecs": [
+        "codecs.StreamRecoder",
+        "codecs.BufferedIncrementalEncoder",
+        "encodings",
+        "codecs.CodecInfo",
+        "codecs.StreamReaderWriter",
+        "codecs.BufferedIncrementalDecoder",
+        "<builtin>.SystemError",
+        "codecs.StreamWriter",
+        "codecs.IncrementalEncoder",
+        "codecs.Codec",
+        "codecs.IncrementalDecoder",
+        "codecs.StreamReader"
+    ],
+    "<builtin>.SystemError": [],
+    "codecs.CodecInfo": [],
+    "codecs.Codec": [],
+    "codecs.IncrementalEncoder": [],
+    "codecs.BufferedIncrementalEncoder": [],
+    "codecs.IncrementalDecoder": [],
+    "codecs.BufferedIncrementalDecoder": [],
+    "codecs.StreamWriter": [],
+    "codecs.StreamReader": [],
+    "codecs.StreamReaderWriter": [],
+    "codecs.StreamRecoder": [],
+    "encodings": [
+        "encodings.CodecRegistryError",
+        "codecs"
+    ],
+    "encodings.CodecRegistryError": [],
+    "token": [
+        "<list>.extend",
+        "<builtin>.isinstance",
+        "<builtin>.globals"
+    ],
+    "<str>.replace": [],
+    "tokenize.TokenInfo": [
+        "<builtin>.property"
+    ],
+    "tokenize.maybe": [
+        "tokenize.group"
+    ],
+    "tokenize.group": [],
+    "tokenize._all_string_prefixes": [],
+    "<builtin>.sorted": [],
+    "tokenize.TokenError": [],
+    "tokenize.StopTokenizing": [],
+    "tokenize.Untokenizer": [],
+    "linecache.getlines": [
+        "linecache.clearcache",
+        "<builtin>.len",
+        "linecache.updatecache"
+    ],
+    "linecache.updatecache": [
+        "<str>.startswith",
+        "posixpath.join",
+        "tokenize.open",
+        "<builtin>.len",
+        "linecache.lazycache",
+        "posixpath.isabs",
+        "ntpath.join",
+        "ntpath.isabs",
+        "<str>.endswith"
+    ],
+    "<str>.startswith": [],
+    "<str>.endswith": [],
+    "linecache.lazycache": [
+        "<str>.endswith",
+        "<str>.startswith",
+        "<builtin>.len",
+        "<builtin>.getattr"
+    ],
+    "ntpath.isabs": [
+        "ntpath._get_bothseps",
+        "os._fspath",
+        "<str>.replace",
+        "<str>.startswith",
+        "<builtin>.isinstance",
+        "<builtin>.len",
+        "ntpath.splitdrive"
+    ],
+    "ntpath.splitdrive": [
+        "<str>.find",
+        "os._fspath",
+        "<str>.replace",
+        "<builtin>.isinstance",
+        "<builtin>.len"
+    ],
+    "<str>.find": [],
+    "ntpath._get_bothseps": [
+        "<builtin>.isinstance"
+    ],
+    "posixpath.isabs": [
+        "os._fspath",
+        "<str>.startswith",
+        "posixpath._get_sep"
+    ],
+    "ntpath.join": [
+        "os._fspath",
+        "<builtin>.map",
+        "<builtin>.isinstance",
+        "ntpath.splitdrive",
+        "genericpath._check_arg_types",
+        "<str>.lower"
+    ],
+    "<str>.lower": [],
+    "tokenize.open": [
+        "tokenize.detect_encoding",
+        "_io.TextIOWrapper",
+        "builtins.open"
+    ],
+    "builtins.open": [],
+    "tokenize.detect_encoding": [
+        "tokenize.detect_encoding.find_cookie",
+        "tokenize.detect_encoding.read_or_stop"
+    ],
+    "tokenize.detect_encoding.read_or_stop": [],
+    "tokenize.detect_encoding.find_cookie": [
+        "tokenize._get_normal_name",
+        "<builtin>.SyntaxError"
+    ],
+    "<builtin>.SyntaxError": [],
+    "tokenize._get_normal_name": [],
+    "_io.TextIOWrapper": [],
+    "linecache.clearcache": [],
+    "<builtin>.RuntimeError": [],
+    "warnings.WarningMessage.__init__": [],
+    "warnings._showwarnmsg": [
+        "warnings._showwarnmsg_impl"
+    ],
+    "warnings._showwarnmsg_impl": [
+        "warnings._formatwarnmsg"
+    ],
+    "warnings._formatwarnmsg": [
+        "warnings._formatwarnmsg_impl"
+    ],
+    "warnings._formatwarnmsg_impl": [
+        "linecache",
+        "<str>.strip",
+        "linecache.getline"
+    ],
+    "linecache.getline": [
+        "<builtin>.len",
+        "linecache.getlines"
+    ],
+    "six.moves.urllib.parse.unquote": [],
+    "furl.furl.join_path_segments": [
+        "<list>.extend",
+        "<builtin>.len",
+        "<list>.pop"
+    ],
+    "<list>.pop": [],
+    "furl.furl.Path.load": [
+        "<list>.pop",
+        "<builtin>.len",
+        "furl.furl.quacks_like_a_path_with_segments",
+        "furl.common.is_iterable_but_not_string",
+        "furl.furl.Path._segments_from_path"
+    ],
+    "furl.furl.Query.__eq__": [
+        "<builtin>.str"
+    ],
+    "furl.furl.Query.__repr__": [
+        "<builtin>.str"
+    ],
+    "furl.furl.Fragment.__bool__": [
+        "<builtin>.bool"
+    ],
+    "furl.furl.Fragment.__eq__": [
+        "<builtin>.str"
+    ],
+    "furl.furl.FragmentCompositionInterface.fragmentstr": [
+        "warnings.warn",
+        "<builtin>.str"
+    ],
+    "furl.furl.furl.asdict": [
+        "furl.furl.idna_encode"
+    ],
+    "furl.furl.idna_encode": [
+        "<builtin>.str",
+        "furl.common.callable_attr"
+    ],
+    "furl.furl.furl.join": [
+        "<builtin>.str",
+        "<builtin>.isinstance",
+        "furl.furl.urljoin",
+        "furl.furl.furl.load"
+    ],
+    "furl.furl.urljoin": [
+        "furl.furl.set_scheme",
+        "furl.furl.has_netloc",
+        "furl.furl.get_scheme"
+    ],
+    "furl.furl.has_netloc": [
+        "furl.furl.get_scheme"
+    ],
+    "furl.furl.get_scheme": [
+        "furl.furl.is_valid_scheme",
+        "<builtin>.max",
+        "<str>.startswith",
+        "<str>.split"
+    ],
+    "furl.furl.is_valid_scheme": [],
+    "furl.furl.set_scheme": [
+        "furl.furl.strip_scheme"
+    ],
+    "furl.furl.strip_scheme": [
+        "<str>.startswith",
+        "<builtin>.len",
+        "furl.furl.get_scheme"
+    ],
+    "furl.furl.furl.load": [
+        "<builtin>.str",
+        "<builtin>.isinstance",
+        "<map>.get",
+        "furl.furl.urlsplit"
+    ],
+    "furl.furl.urlsplit": [
+        "furl.furl.strip_scheme",
+        "furl.furl.set_scheme",
+        "<str>.startswith",
+        "furl.furl.get_scheme"
+    ],
+    "furl.furl.Path.__repr__": [
+        "<builtin>.str"
+    ],
+    "furl.furl.Path.normalize": [
+        "<builtin>.str",
+        "<str>.startswith",
+        "<str>.lstrip",
+        "furl.furl.Path.load",
+        "posixpath.normpath"
+    ],
+    "posixpath.normpath": [
+        "os._fspath",
+        "<str>.startswith",
+        "<list>.pop",
+        "<builtin>.isinstance",
+        "<list>.append",
+        "<str>.split"
+    ],
+    "<str>.lstrip": [],
+    "furl.furl.Path.set": [
+        "furl.furl.Path.load"
+    ],
+    "furl.furl.PathCompositionInterface.pathstr": [
+        "warnings.warn",
+        "<builtin>.str"
+    ],
+    "furl.furl.Query.__bool__": [
+        "<builtin>.len"
+    ],
+    "furl.omdict1D.omdict1D.__setitem__": [
+        "furl.omdict1D.omdict1D._set"
+    ],
+    "furl.omdict1D.omdict1D._set": [
+        "orderedmultidict.orderedmultidict.omdict.setlist",
+        "furl.common.is_iterable_but_not_string"
+    ],
+    "orderedmultidict.orderedmultidict.omdict.setlist": [
+        "six.moves.zip_longest",
+        "<builtin>.list",
+        "furl.omdict1D.omdict1D.add",
+        "orderedmultidict.orderedmultidict.omdict.add",
+        "orderedmultidict.orderedmultidict.omdict.pop"
+    ],
+    "six.moves.zip_longest": [],
+    "furl.omdict1D.omdict1D.add": [
+        "furl.common.is_iterable_but_not_string",
+        "<builtin>.list"
+    ],
+    "orderedmultidict.orderedmultidict.omdict.add": [],
+    "orderedmultidict.orderedmultidict.omdict.pop": [
+        "<builtin>.KeyError",
+        "orderedmultidict.orderedmultidict.omdict.poplist"
+    ],
+    "orderedmultidict.orderedmultidict.omdict.poplist": [
+        "orderedmultidict.orderedmultidict.omdict.getlist",
+        "<builtin>.KeyError"
+    ],
+    "orderedmultidict.orderedmultidict.omdict.getlist": [],
+    "<builtin>.KeyError": []
+}
