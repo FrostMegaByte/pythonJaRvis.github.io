@@ -59,7 +59,7 @@ d_1=new\_def(x), d_2=new\_def(d_1.m), d_3=new\_def(a)
 &\frac{d=new\_def(cls),base_{1...n}=new\_def(base_{1...n})}{\Delta_{e} \leftarrow \langle d, \varnothing, e \rangle,\mathcal{C} \leftarrow \langle d,base_{1...n} \rangle}\\
 &{Return:}~def~m^\prime ...~return~x\\
 &\frac{d_1=new\_def(m^\prime), d_2=new\_def(x)}{\Delta_{e} \leftarrow \langle d_1.\textit{<ret>}, d_2, e \rangle}\\
-&{with:}~with~cls()~as~f\\
+&{With:}~with~cls()~as~f\\
 &\frac{
 \begin{matrix}
 d_1=new\_def(cls), d_2=new\_def(cls.\_\_enter\_\_), d_3=new\_def(f)
@@ -69,7 +69,7 @@ d_1=new\_def(cls), d_2=new\_def(cls.\_\_enter\_\_), d_3=new\_def(f)
 \Delta_{call}~\leftarrow~{inter\_analysis}(f,~e,~\mathcal{FAG}^f_{e.p}), \Delta_{call}~\leftarrow~\langle~d_3,~d_2.\textit{<ret>},~e\rangle
 \end{matrix}
 }\\
-&{iter-iteration:}~for~x~in~cls()\\
+&{For:}~for~x~in~cls()\\
 &\frac{
 \begin{matrix}
 d_1=new\_def(cls), d_2=new\_def(cls.\_\_iter\_\_), d_3=new\_def(f)
