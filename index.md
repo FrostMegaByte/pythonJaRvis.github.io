@@ -25,7 +25,6 @@ The paper has been submitted to FSE 2023, please see our [code](Jarvis.zip)  and
 
 # Transfer rules
 
-
 $$\begin{align*}
 &{Import:}~from~m~^\prime~import~x, import~m^\prime \\
 &\frac{\begin{matrix}
@@ -54,10 +53,10 @@ d_1=new\_def(x), d_2=new\_def(d_1.m), d_3=new\_def(a)
 \Delta_{call}~\leftarrow~{inter\_analysis}(f,~e,~\mathcal{FAG}^f_{e.p}), \Delta_{call}~\leftarrow~\langle~d_3,~d_2.\textit{<ret>},~e\rangle
 \end{matrix}
 }\\
-&{Func:}~def~m^\prime ...\\
-&\frac{d_1=new\_def(m^\prime)}{\Delta_{e} \leftarrow \langle d_1, \varnothing, e \rangle}\\
-&{Class:}~class~cls ...\\
-&\frac{d_1=new\_def(cls)}{\Delta_{e} \leftarrow \langle d_1, \varnothing, e \rangle}\\
+&{Func:}~def~m^\prime(args...) ...\\
+&\frac{d=new\_def(m^\prime),d_{1...n}=new\_def(args_{1...n})}{\Delta_{e} \leftarrow \langle d, \varnothing, e \rangle,\mathcal{F} \leftarrow \langle d,args_{1...n} \rangle}\\
+&{Class:}~class~cls(base...) ...\\
+&\frac{d=new\_def(cls),base_{1...n}=new\_def(base_{1...n})}{\Delta_{e} \leftarrow \langle d, \varnothing, e \rangle,\mathcal{C} \leftarrow \langle d,base_{1...n} \rangle}\\
 &{Return:}~def~m^\prime ...~return~x\\
 &\frac{d_1=new\_def(m^\prime), d_2=new\_def(x)}{\Delta_{e} \leftarrow \langle d_1.\textit{<ret>}, d_2, e \rangle}\\
 &{with:}~with~cls()~as~f\\
