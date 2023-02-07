@@ -79,15 +79,4 @@ d_1=new\_def(cls), d_2=new\_def(cls.\_\_iter\_\_), d_3=new\_def(f)
 \Delta_{call}~\leftarrow~{inter\_analysis}(f,~e,~\mathcal{FAG}^f_{e.p}), \Delta_{call}~\leftarrow~\langle~d_3,~d_2.\textit{<ret>},~e\rangle
 \end{matrix}
 }\\
-&{if:}~if~(test)~...~else~...\\
-&\frac{
-\begin{matrix}
-transfer(test),d_1=new\_def(if),d_2=new\_def(else)
-\end{matrix}
-}
-{\begin{matrix}
-\Delta_{call\_if}~\leftarrow~{inter\_analysis}(f_1,~e_1,~\mathcal{FAG}^{f_1}{e_1.p})\rangle,\Delta_{call\_else}~\leftarrow~{inter\_analysis}(f_2,~e_2,~\mathcal{FAG}^{f_2}_{e_2.p})\rangle
-\end{matrix}
-}\\
-
 \end{align*}$$
