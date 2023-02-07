@@ -91,7 +91,7 @@ def main():
     args = parser.parse_args()
 
     cg = CallGraphGenerator(args.entry_point, args.package,
-                            args.max_iter,decy=args.decy,moduleEntry=args.moduleEntry,demand_ratios=args.demand_ratios)
+                            args.max_iter, args.operation,decy=args.decy,moduleEntry=args.moduleEntry,demand_ratios=args.demand_ratios)
     cg.analyze()
 
 
