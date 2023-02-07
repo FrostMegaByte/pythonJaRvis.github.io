@@ -14,3 +14,12 @@ The paper has been submitted to FSE 2023, please see our [code](Jarvis.zip)  and
 
 # Transfer rules
 
+$Import:from~m^\prime~import~x, import~m^\prime$
+$\frac{d_1=new\_def(m,~x),~ d_2=new\_def(m^\prime,~x),~ d_3=d_m,~ d_4=new\_def(m^\prime)}{\Delta_{e} \leftarrow \langle d_1, d_2, e\rangle, \Delta_{e} \leftarrow \langle d_3, d_4, e\rangle}$
+
+
+
+$Assign:~x=y$
+
+$\frac{d_1=new\_def(x),~ d_2=new\_def(y)}{\Delta_{e} \leftarrow \langle d_1, d_2, e\rangle}$
+
