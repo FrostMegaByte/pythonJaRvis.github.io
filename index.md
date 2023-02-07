@@ -23,7 +23,7 @@ The paper has been submitted to ESEC/FSE 2023, please see our [code](Jarvis.zip)
 
 
 
-# Transfer rules
+## Transfer rules
 
 $$\begin{align*}
 &{Import:}~from~m~^\prime~import~x, import~m^\prime \\
