@@ -1,3 +1,14 @@
+<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
 ## ABSTRACT
 
 Call graph generation is the foundation of inter-procedural static analysis. PyCG is the state-of-the-art approach for generating call graphs for Python programs. Unfortunately, PyCG does not scale to large programs when adapted to whole-program analysis where dependent libraries are also analyzed. Further, PyCG does not support demand-driven analysis where only the reachable functions from givenentry functions are analyzed. Moreover, PyCG is flow-insensitive and~does not fully support Python's features, hindering its accuracy.
@@ -17,7 +28,6 @@ The paper has been submitted to FSE 2023, please see our [code](Jarvis.zip)  and
 $Import:from~m^\prime~import~x, import~m^\prime$
 $\frac{d_1=new\_def(m,~x),~ d_2=new\_def(m^\prime,~x),~ d_3=d_m,~ d_4=new\_def(m^\prime)}{\Delta_{e} \leftarrow \langle d_1, d_2, e\rangle, \Delta_{e} \leftarrow \langle d_3, d_4, e\rangle}$
 
-13123
 
 $Assign:~x=y$
 
