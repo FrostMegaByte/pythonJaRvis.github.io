@@ -79,4 +79,34 @@ d_1=new\_def(cls), d_2=new\_def(cls.\_\_iter\_\_), d_3=new\_def(f)
 \Delta_{call}~\leftarrow~{inter\_analysis}(f,~e,~\mathcal{FAG}^f_{e.p}), \Delta_{call}~\leftarrow~\langle~d_3,~d_2.\textit{<ret>},~e\rangle
 \end{matrix}
 }\\
+&{If:}~if ...\\
+&
+\frac{}{\begin{matrix}
+ \mathcal{CFG} \leftarrow \langle {Expr}, {Ctrl}, {if}, {\varnothing}\rangle
+\end{matrix}}
+\\
+&{If-Else:}~if ...~else~ ...\\
+&
+\frac{}{\begin{matrix}
+ \mathcal{CFG} \leftarrow \langle {Expr_{if}}, {Ctrl_{if}}, {<if,else>}, {\varnothing}\rangle
+\end{matrix}}
+\\
+&{While:}~while ...\\
+&
+\frac{}{\begin{matrix}
+ \mathcal{CFG} \leftarrow \langle {Expr}, {Ctrl}, {while}, {\varnothing}\rangle
+\end{matrix}}
+\\
+&{While-Else:}~while ...~else~ ...\\
+&
+\frac{}{\begin{matrix}
+ \mathcal{CFG} \leftarrow \langle {Expr}, {Ctrl}, {<while,else>}, {\varnothing}\rangle
+\end{matrix}}
+\\
+&{Exception:}~try ...~catch~ ...\\
+&\frac{}{\begin{matrix}
+ \mathcal{CFG} \leftarrow \langle {Expr}, {Ctrl}, {<try,catch>}, {\varnothing}\rangle
+\end{matrix}}
+\\
 \end{align*}$$
+
