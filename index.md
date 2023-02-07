@@ -25,11 +25,70 @@ The paper has been submitted to FSE 2023, please see our [code](Jarvis.zip)  and
 
 # Transfer rules
 
-$Import:from~m^\prime~import~x, import~m^\prime$
-$\frac{d_1=new\_def(m,~x),~ d_2=new\_def(m^\prime,~x),~ d_3=d_m,~ d_4=new\_def(m^\prime)}{\Delta_{e} \leftarrow \langle d_1, d_2, e\rangle, \Delta_{e} \leftarrow \langle d_3, d_4, e\rangle}$
 
+$$\begin{align*}
+&{Import:}~from~m~^\prime~import~x, import~m^\prime \\
+&\frac{\begin{matrix}
+d_1=new\_def(m,~x), d_2=new\_def(m^\prime,~x), d_3=d_m, d_4=new\_def(m^\prime)
+\end{matrix}
+}{ \Delta_{e} \leftarrow \langle d_1, d_2, e\rangle, \Delta_{e} \leftarrow \langle d_3, d_4, e\rangle}\\
+&{Assign:}~x=y \\
+&\frac{d_1=new\_def(x), d_2=new\_def(y)} { \Delta_{e} \leftarrow \langle d_1, d_2, e\rangle} \\
+&{Store:}~x.field~=~y\\
+&\frac{d_i \in points(x), d_2 = new\_def(y)}{\Delta_{e} \leftarrow \langle d_i.field, d_2, e\rangle}\\
+&{Load:}~y~=~x.field\\
+&\frac{d_1 \in new\_def(y), d_j \in points(x)}{\Delta_{e} \leftarrow \langle d_1, d_j.field,~e \rangle} \\
+&{New:}~y~=~new~x(...) \\
+&\frac{d_1=new\_def(y), d_2=new\_def(x)}{
+\begin{matrix}
+\Delta_{e}~\leftarrow~{inter\_analysis}(f,~e,~\mathcal{FAG}^f_{e.p}), \Delta_{e}~\leftarrow~\langle~d_1,~d_2,~e~\rangle\\
+\end{matrix}
+} \\
+&{Call:}~a=x.m(...) \\
+&\frac{
+\begin{matrix}
+d_1=new\_def(x), d_2=new\_def(d_1.m), d_3=new\_def(a)
+\end{matrix}
+}
+{\begin{matrix}
+\Delta_{call}~\leftarrow~{inter\_analysis}(f,~e,~\mathcal{FAG}^f_{e.p}), \Delta_{call}~\leftarrow~\langle~d_3,~d_2.\textit{<ret>},~e\rangle
+\end{matrix}
+}\\
+&{Func:}~def~m^\prime ...\\
+&\frac{d_1=new\_def(m^\prime)}{\Delta_{e} \leftarrow \langle d_1, \varnothing, e \rangle}\\
+&{Class:}~class~cls ...\\
+&\frac{d_1=new\_def(cls)}{\Delta_{e} \leftarrow \langle d_1, \varnothing, e \rangle}\\
+&{Return:}~def~m^\prime ...~return~x\\
+&\frac{d_1=new\_def(m^\prime), d_2=new\_def(x)}{\Delta_{e} \leftarrow \langle d_1.\textit{<ret>}, d_2, e \rangle}\\
+&{with:}~with~cls()~as~f\\
+&\frac{
+\begin{matrix}
+d_1=new\_def(cls), d_2=new\_def(cls.\_\_enter\_\_), d_3=new\_def(f)
+\end{matrix}
+}
+{\begin{matrix}
+\Delta_{call}~\leftarrow~{inter\_analysis}(f,~e,~\mathcal{FAG}^f_{e.p}), \Delta_{call}~\leftarrow~\langle~d_3,~d_2.\textit{<ret>},~e\rangle
+\end{matrix}
+}\\
+&{iter-iteration:}~for~x~in~cls()\\
+&\frac{
+\begin{matrix}
+d_1=new\_def(cls), d_2=new\_def(cls.\_\_iter\_\_), d_3=new\_def(f)
+\end{matrix}
+}
+{\begin{matrix}
+\Delta_{call}~\leftarrow~{inter\_analysis}(f,~e,~\mathcal{FAG}^f_{e.p}), \Delta_{call}~\leftarrow~\langle~d_3,~d_2.\textit{<ret>},~e\rangle
+\end{matrix}
+}\\
+&{if:}~if~(test)~...~else~...\\
+&\frac{
+\begin{matrix}
+transfer(test),d_1=new\_def(if),d_2=new\_def(else)
+\end{matrix}
+}
+{\begin{matrix}
+\Delta_{call\_if}~\leftarrow~{inter\_analysis}(f_1,~e_1,~\mathcal{FAG}^{f_1}{e_1.p})\rangle,\Delta_{call\_else}~\leftarrow~{inter\_analysis}(f_2,~e_2,~\mathcal{FAG}^{f_2}_{e_2.p})\rangle
+\end{matrix}
+}\\
 
-$Assign:~x=y$
-
-$\frac{d_1=new\_def(x),~ d_2=new\_def(y)}{\Delta_{e} \leftarrow \langle d_1, d_2, e\rangle}$
-
+\end{align*}$$
