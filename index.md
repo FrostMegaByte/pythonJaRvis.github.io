@@ -88,7 +88,13 @@ d_1=new\_def(cls), d_2=new\_def(cls.\_\_iter\_\_), d_3=new\_def(f)
 &{If-Else:}~if ...~else~ ...\\
 &
 \frac{}{\begin{matrix}
- \mathcal{CFG} \leftarrow \langle {Expr_{if}}, {Ctrl_{if}}, {<if,else>}, {\varnothing}\rangle
+ \mathcal{CFG} \leftarrow \langle {Expr}, {Ctrl}, {<if,else>}, {\varnothing}\rangle
+\end{matrix}}
+\\
+&{Elif:}~elif~...\\
+&
+\frac{}{\begin{matrix}
+ \mathcal{CFG} \leftarrow \langle {Expr}, {Ctrl}, {else}, {\varnothing}\rangle,  \langle {Expr}, {Ctrl}, {if}, {\varnothing}\rangle
 \end{matrix}}
 \\
 &{While:}~while ...\\
