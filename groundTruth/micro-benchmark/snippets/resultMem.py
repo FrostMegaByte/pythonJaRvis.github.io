@@ -82,7 +82,7 @@ def main(base):
     global_pythoncg = list(map(lambda x: x[0] + x[1], zip(pre_python, global_pythoncg)))
 
 
-entryes = [
+entries = [
     "/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/args",
     "/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/assignments",
     "/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/builtins",
@@ -108,7 +108,7 @@ entryes = [
 ]
 pycgtotal = 0
 pythontotal = 0
-for index, entry in enumerate(entryes):
+for index, entry in enumerate(entries):
     print(entry.split(os.path.sep)[-1])
     visited = set()
     pycgcur, pythoncur = 0, 0
