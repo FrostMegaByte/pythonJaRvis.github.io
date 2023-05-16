@@ -78,12 +78,8 @@ def main():
         choices=[CALL_GRAPH_OP, KEY_ERR_OP],
         help=(
             "Operation to perform. "
-            + "Choose "
-            + CALL_GRAPH_OP
-            + " for call graph generation (default)"
-            + " or "
-            + KEY_ERR_OP
-            + " for key error detection on dictionaries."
+            + f"Choose {CALL_GRAPH_OP} for call graph generation (default)"
+            + f" or {KEY_ERR_OP} for key error detection on dictionaries."
         ),
         default=CALL_GRAPH_OP,
     )
