@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class FunctionsTest(TestBase):
     snippet_dir = "functions"

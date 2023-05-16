@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class ExceptionsTest(TestBase):
     snippet_dir = "exceptions"

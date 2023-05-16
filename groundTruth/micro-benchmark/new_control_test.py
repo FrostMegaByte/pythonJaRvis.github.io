@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class newControlTest(TestBase):
     snippet_dir = "newCase/control_flow"
@@ -11,7 +9,6 @@ class newControlTest(TestBase):
 
     def test_if(self):
         self.validate_snippet(self.get_snippet_path("if"))
-
 
     def test_while(self):
         self.validate_snippet(self.get_snippet_path("while"))

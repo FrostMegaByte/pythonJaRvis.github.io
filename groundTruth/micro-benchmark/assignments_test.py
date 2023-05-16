@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class AssignmentsTest(TestBase):
     snippet_dir = "assignments"

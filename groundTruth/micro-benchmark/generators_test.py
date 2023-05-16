@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class GeneratorsTest(TestBase):
     snippet_dir = "generators"
