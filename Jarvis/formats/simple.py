@@ -1,5 +1,5 @@
-
 from .base import BaseFormatter
+
 
 class Simple(BaseFormatter):
     def __init__(self, cg_generator):
