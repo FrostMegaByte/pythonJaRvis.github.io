@@ -23,7 +23,7 @@ start_pycg(){
 				curDir_pythonCG="${file%/*}/oldCG.json"
 				curDir_pycg="${file%/*}/pycg.json"
 				# pycg "$file" --package ${file%/*} -o "$curDir_pycg"
-#				python3 ${entry} "$file" --package ${file%/*} -o "$curDir_pythonCG"
+				# python3 ${entry} "$file" --package ${file%/*} -o "$curDir_pythonCG"
 				/usr/bin/time -lp pycg "$file" --package ${file%/*} > ${file%/*}/pycg.log 2>&1
 				/usr/bin/time -lp python3 ${entry} "$file" --package ${file%/*} > ${file%/*}/pythoncg.log 2>&1
 			fi
