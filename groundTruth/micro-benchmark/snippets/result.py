@@ -139,35 +139,36 @@ def main(index,base):
     global_pycg = list(map(lambda x:x[0] + x[1] , zip(pre_pycg,global_pycg)))
     global_pythoncg = list(map(lambda x:x[0] + x[1] , zip(pre_python,global_pythoncg)))
 
-entryes = [
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/assignments',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/builtins',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/classes',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/decorators',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/dicts',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/direct_calls',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/exceptions',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/functions',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/generators',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/imports',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/kwargs',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/lambdas',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/lists',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/mro',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/args',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/returns',
-
-
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/newCase/args',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/newCase/assign',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/newCase/calls',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/newCase/control_flow',
-    '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/newCase/import',
+SNIPPETS_PATH = "/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets"
+entries = [
+    f"{SNIPPETS_PATH}/assignments",
+    f"{SNIPPETS_PATH}/builtins",
+    f"{SNIPPETS_PATH}/classes",
+    f"{SNIPPETS_PATH}/decorators",
+    f"{SNIPPETS_PATH}/dicts",
+    f"{SNIPPETS_PATH}/direct_calls",
+    f"{SNIPPETS_PATH}/exceptions",
+    f"{SNIPPETS_PATH}/functions",
+    f"{SNIPPETS_PATH}/generators",
+    f"{SNIPPETS_PATH}/imports",
+    f"{SNIPPETS_PATH}/kwargs",
+    f"{SNIPPETS_PATH}/lambdas",
+    f"{SNIPPETS_PATH}/lists",
+    f"{SNIPPETS_PATH}/mro",
+    f"{SNIPPETS_PATH}/args",
+    f"{SNIPPETS_PATH}/returns",
+    # New cases
+    f"{SNIPPETS_PATH}/newCase/args",
+    f"{SNIPPETS_PATH}/newCase/assign",
+    f"{SNIPPETS_PATH}/newCase/calls",
+    f"{SNIPPETS_PATH}/newCase/control_flow",
+    f"{SNIPPETS_PATH}/newCase/import",
 ]
+
 if __name__ == "__main__":
-    for index,entry in enumerate(entryes):
-        main(index,entry)
-    print(global_pycg,global_pythoncg)
-        
+    for index, entry in enumerate(entries):
+        main(index, entry)
+    print(global_pycg, global_pythoncg)
+
 # complete 不包含没有调用的边
 # sound    包含了所有调用的边
