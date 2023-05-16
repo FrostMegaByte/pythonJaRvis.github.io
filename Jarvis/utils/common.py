@@ -19,7 +19,7 @@
 # under the License.
 #
 import os
-from functools import reduce
+
 
 def get_lambda_name(counter):
     return "<lambda{}>".format(counter)
