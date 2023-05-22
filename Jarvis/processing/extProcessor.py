@@ -1,6 +1,10 @@
-
 import ast
-from machinery.definitions import Definition, DefinitionManager, ChangeManager, ChangeItem
+from machinery.definitions import (
+    Definition,
+    DefinitionManager,
+    ChangeManager,
+    ChangeItem,
+)
 from machinery.classes import ClassManager, ClassNode
 from machinery.scopes import ScopeManager, ScopeItem
 from processing.base import ProcessingBase
@@ -14,12 +18,24 @@ from functools import reduce
 from machinery.callgraph import CallGraph
 
 
-# from pycg.processing import preprocessor
 class ExtProcessor(ProcessingBase):
-    def __init__(self, filename, modname,
-                 import_manager, scope_manager, def_manager, class_manager,
-                 module_manager, change_manager, node_manager, cg, callStack=[], visited_scope=set(),
-                 modules_analyzed=None, decy=True):
+    def __init__(
+        self,
+        filename,
+        modname,
+        import_manager,
+        scope_manager,
+        def_manager,
+        class_manager,
+        module_manager,
+        change_manager,
+        node_manager,
+        cg,
+        callStack=[],
+        visited_scope=set(),
+        modules_analyzed=None,
+        decy=True,
+    ):
         if filename.endswith(".so") or filename.endswith("unicode.py"):
             self.import_manager = None
             self.modules_analyzed = set()
@@ -94,7 +110,10 @@ class ExtProcessor(ProcessingBase):
         curScope: ScopeItem = self.scope_manager.get_scope(self.current_ns)
         callScope: ScopeItem = self.scope_manager.get_scope(callNs)
         if isVisited:
-            if callDefi.get_type() == utils.constants.FUN_DEF and str(callScope) in self.visited_scope:
+            if (
+                callDefi.get_type() == utils.constants.FUN_DEF
+                and str(callScope) in self.visited_scope
+            ):
                 return
         self.callStack.append(callDefi.get_ns())
         gol.add_value(callDefi.get_ns())
@@ -107,11 +126,11 @@ class ExtProcessor(ProcessingBase):
         self.import_manager.set_current_mod(imp.name, imp.filename)
         method = None
         if callDefi.get_type() == utils.constants.ELSE_DEF:
-            method = 'visit_else'
+            method = "visit_else"
         elif callDefi.get_type() == utils.constants.WHILE_DEF:
-            method = 'visit_With'
+            method = "visit_With"
         else:
-            method = 'visit_' + node.__class__.__name__
+            method = "visit_" + node.__class__.__name__
         visitor = getattr(super(), method, self.generic_visit)
         if callDefi.get_type() == utils.constants.IF_DEF:
             visitor(node, utils.get_if_name(curScope.get_if_counter()))
@@ -122,7 +141,7 @@ class ExtProcessor(ProcessingBase):
         else:
             visitor(node)
         if isEntry:
-            if hasattr(node, 'lineno'):
+            if hasattr(node, "lineno"):
                 self.popStack(node.lineno, isEntry)
             else:
                 self.popStack()
@@ -145,7 +164,7 @@ class ExtProcessor(ProcessingBase):
                 scope: ScopeItem = self.scope_manager.get_scope(scopens)
                 if not scope:
                     return
-                field = key[len(scopens) + 1:]
+                field = key[len(scopens) + 1 :]
                 defi: Definition = self.def_manager.get(key)
                 if not defi:
                     defi = self.def_manager.create(key, utils.constants.NAME_DEF)
@@ -191,12 +210,15 @@ class ExtProcessor(ProcessingBase):
         self.node_manager.add(self.modname, node)
         if not root_sc or root_sc:
             # initialize module scopes
-            items = self.scope_manager.handle_module(self.modname,
-                                                     self.filename, self.contents)
+            items = self.scope_manager.handle_module(
+                self.modname, self.filename, self.contents
+            )
             root_sc = self.scope_manager.get_scope(self.modname)
             root_defi = self.def_manager.get(self.modname)
             if not root_defi:
-                root_defi = self.def_manager.create(self.modname, utils.constants.MOD_DEF)
+                root_defi = self.def_manager.create(
+                    self.modname, utils.constants.MOD_DEF
+                )
             root_sc.add_def(self.modname.split(".")[-1], root_defi)
             # create function and class defs and add them to their scope
             # we do this here, because scope_manager doesn't have an
@@ -217,7 +239,9 @@ class ExtProcessor(ProcessingBase):
         if_full_ns = utils.join_ns(self.current_ns, if_name)
         # create a scope for the lambda
         self.scope_manager.create_scope(if_full_ns, current_scope)
-        if_def = self.def_manager.handle_if_def(self.current_ns, if_name, utils.constants.WHILE_DEF)
+        if_def = self.def_manager.handle_if_def(
+            self.current_ns, if_name, utils.constants.WHILE_DEF
+        )
         # add it to the current scope
         current_scope.add_def(if_name, if_def)
         for item in node.items:
@@ -241,20 +265,24 @@ class ExtProcessor(ProcessingBase):
             if leftDefi:
                 if not leftDefi[0]:
                     continue
-                function1Ns = utils.join_ns(leftDefi[0].get_ns(), '__enter__')
-                function2Ns = utils.join_ns(leftDefi[0].get_ns(), '__exit__')
+                function1Ns = utils.join_ns(leftDefi[0].get_ns(), "__enter__")
+                function2Ns = utils.join_ns(leftDefi[0].get_ns(), "__exit__")
                 function1Defi = self.def_manager.get(function1Ns)
                 function2Defi = self.def_manager.get(function2Ns)
                 self.pushStack(function1Defi, isEntry=True)
                 self.pushStack(function2Defi, isEntry=True)
-                leftPoint = self.getYPOint(node.lineno, utils.join_ns(function1Ns, utils.constants.RETURN_NAME))
-                self.scope_manager.handle_assign(self.current_ns, rightNs[len(self.current_ns) + 1:], rightDefi)
+                leftPoint = self.getYPOint(
+                    node.lineno, utils.join_ns(function1Ns, utils.constants.RETURN_NAME)
+                )
+                self.scope_manager.handle_assign(
+                    self.current_ns, rightNs[len(self.current_ns) + 1 :], rightDefi
+                )
                 rightDefi.add_value_point(node.lineno, leftPoint)
         self.node_manager.add(if_full_ns, node)
         self.pushStack(if_def)
         pass
 
-    def visit_Import(self, node, prefix='', level=0):
+    def visit_Import(self, node, prefix="", level=0):
         """
         For imports of the form
             `from something import anything`
@@ -287,7 +315,9 @@ class ExtProcessor(ProcessingBase):
                 if imported_scope:
                     for name, defi in imported_scope.get_defs().items():
                         create_def(current_scope, name)
-                        current_scope.get_def(name).add_value_point(node.lineno, defi.get_ns())
+                        current_scope.get_def(name).add_value_point(
+                            node.lineno, defi.get_ns()
+                        )
             else:
                 if imported_scope:
                     defi = imported_scope.get_def(imp_name)
@@ -295,12 +325,19 @@ class ExtProcessor(ProcessingBase):
                         defi = self.def_manager.get(imp_name)
                     if not defi:
                         return
-                    if modname == tgt_name and defi.get_type() != utils.constants.MOD_DEF:
+                    if (
+                        modname == tgt_name
+                        and defi.get_type() != utils.constants.MOD_DEF
+                    ):
                         create_def(current_scope, tgt_name)
-                        current_scope.get_def(tgt_name).add_value_point(node.lineno, modname)
+                        current_scope.get_def(tgt_name).add_value_point(
+                            node.lineno, modname
+                        )
                     else:
                         create_def(current_scope, tgt_name)
-                        current_scope.get_def(tgt_name).add_value_point(node.lineno, defi.get_ns())
+                        current_scope.get_def(tgt_name).add_value_point(
+                            node.lineno, defi.get_ns()
+                        )
 
         # 加入ext_def，会出现指向
         def add_external_def(name, target, row=0):
@@ -344,9 +381,13 @@ class ExtProcessor(ProcessingBase):
             nodeTest: ast.Compare = node.test
             if not isinstance(nodeTest, ast.Compare):
                 return False
-            if isinstance(nodeTest.left,
-                          ast.Name) and nodeTest.left.id == '__name__' and nodeTest.comparators and isinstance(
-                    nodeTest.comparators[0], ast.Constant) and nodeTest.comparators[0].value == '__main__':
+            if (
+                isinstance(nodeTest.left, ast.Name)
+                and nodeTest.left.id == "__name__"
+                and nodeTest.comparators
+                and isinstance(nodeTest.comparators[0], ast.Constant)
+                and nodeTest.comparators[0].value == "__main__"
+            ):
                 modNs = self.get_module_ns(self.current_ns)
                 if modNs not in self.module_manager.local:
                     return True
@@ -375,7 +416,9 @@ class ExtProcessor(ProcessingBase):
             else_name = utils.get_else_name(if_counter)
             else_full_ns = utils.join_ns(self.current_ns, else_name)
             self.scope_manager.create_scope(else_full_ns, current_scope)
-            else_def = self.def_manager.handle_if_def(self.current_ns, else_name, utils.constants.ELSE_DEF)
+            else_def = self.def_manager.handle_if_def(
+                self.current_ns, else_name, utils.constants.ELSE_DEF
+            )
             current_scope.add_def(else_name, else_def)
             self.match[if_full_ns] = else_full_ns
             self.node_manager.add(else_full_ns, node)
@@ -403,8 +446,11 @@ class ExtProcessor(ProcessingBase):
             for x in xList:
                 x_defi = None
                 if isinstance(x, str):
-                    x_defi: Definition = self.get_or_create(self.current_ns, x[len(self.current_ns) + 1:],
-                                                            utils.constants.NAME_DEF)
+                    x_defi: Definition = self.get_or_create(
+                        self.current_ns,
+                        x[len(self.current_ns) + 1 :],
+                        utils.constants.NAME_DEF,
+                    )
                 elif isinstance(x, Definition):
                     x_defi = x
                 if not x_defi:
@@ -418,14 +464,19 @@ class ExtProcessor(ProcessingBase):
                     y_point = []
                 else:
                     y_point = self.getYPOint(row, y)
-                if curNsDefi.get_type() not in [utils.constants.IF_DEF, utils.constants.WHILE_DEF,
-                                                utils.constants.ELSE_DEF]:
+                if curNsDefi.get_type() not in [
+                    utils.constants.IF_DEF,
+                    utils.constants.WHILE_DEF,
+                    utils.constants.ELSE_DEF,
+                ]:
                     x_defi.add_value_point(row, y_point)
                 else:
                     if self.iSDefiInScope(x_defi.get_ns(), self.current_ns):
                         x_defi.add_value_point(row, y_point)
                     else:
-                        self.change_manager.addChange(self.current_ns, x_defi.get_ns(), row, y_point)
+                        self.change_manager.addChange(
+                            self.current_ns, x_defi.get_ns(), row, y_point
+                        )
             pass
 
         def store(xList, f, y):
@@ -433,10 +484,15 @@ class ExtProcessor(ProcessingBase):
             xPointList = self.getYPOint(row, xList)
             y_point = self.getYPOint(row, y)
             for x in xPointList:
-                if curScope.get_def(x) and curScope.get_def(x).get_type() == utils.constants.NAME_DEF:
+                if (
+                    curScope.get_def(x)
+                    and curScope.get_def(x).get_type() == utils.constants.NAME_DEF
+                ):
                     curScope.get_def(x).add_value_point(row, y_point)
                 else:
-                    self.change_manager.addChange(self.current_ns, utils.join_ns(x, f), row, y_point)
+                    self.change_manager.addChange(
+                        self.current_ns, utils.join_ns(x, f), row, y_point
+                    )
                     defi: Definition = self.def_manager.get(utils.join_ns(x, f))
                     if defi:
                         defi.add_value_point(row, y_point)
@@ -451,15 +507,24 @@ class ExtProcessor(ProcessingBase):
             else:
                 if isinstance(target, ast.Name):
                     curNsDefi: Definition = self.def_manager.get(self.current_ns)
-                    if curNsDefi.get_type() not in [utils.constants.IF_DEF, utils.constants.WHILE_DEF,
-                                                    utils.constants.ELSE_DEF]:
+                    if curNsDefi.get_type() not in [
+                        utils.constants.IF_DEF,
+                        utils.constants.WHILE_DEF,
+                        utils.constants.ELSE_DEF,
+                    ]:
                         assign(self._get_target_ns(target), decoded)
                     else:
-                        leftTarget = self.scope_manager.get_def(self.current_ns, target.id)
+                        leftTarget = self.scope_manager.get_def(
+                            self.current_ns, target.id
+                        )
                         if not leftTarget:
                             leftTargetNs = utils.join_ns(self.current_ns, target.id)
-                            leftTargetDefi = self.def_manager.create(leftTargetNs, utils.constants.NAME_DEF)
-                            self.scope_manager.handle_assign(self.current_ns, target.id, leftTargetDefi)
+                            leftTargetDefi = self.def_manager.create(
+                                leftTargetNs, utils.constants.NAME_DEF
+                            )
+                            self.scope_manager.handle_assign(
+                                self.current_ns, target.id, leftTargetDefi
+                            )
                         assign(self.decode_node(target), decoded)
                 elif isinstance(target, ast.Attribute):
                     store(self.decode_node(target.value), target.attr, decoded)
@@ -491,7 +556,9 @@ class ExtProcessor(ProcessingBase):
                     continue
                 self.visit(d)
                 # defaults[node.args.args[cnt].arg] = self.decode_node(d)
-                defaults[node.args.posonlyargs[cnt].arg] = self.getYPOint(node.lineno, self.decode_node(d))
+                defaults[node.args.posonlyargs[cnt].arg] = self.getYPOint(
+                    node.lineno, self.decode_node(d)
+                )
             return defaults
         # try:
         start = len(node.args.args) - len(node.args.defaults)
@@ -500,7 +567,9 @@ class ExtProcessor(ProcessingBase):
             if not d:
                 continue
             self.visit(d)
-            defaults[node.args.args[cnt].arg] = self.getYPOint(node.lineno, self.decode_node(d))
+            defaults[node.args.args[cnt].arg] = self.getYPOint(
+                node.lineno, self.decode_node(d)
+            )
         return defaults
 
     def _handle_function_def(self, node, fn_name, fn_ns):
@@ -509,8 +578,12 @@ class ExtProcessor(ProcessingBase):
         fn_def: Definition = self.def_manager.handle_function_def(fn_ns, fn_name)
         fn_scope: ScopeItem = self.scope_manager.get_scope(fn_def.get_ns())
         if not fn_scope:
-            fn_scope = self.scope_manager.create_scope(fn_def.get_ns(), self.scope_manager.get_scope(fn_ns))
-        ret_def: Definition = self.def_manager.get(utils.join_ns(fn_def.get_ns(), utils.constants.RETURN_NAME))
+            fn_scope = self.scope_manager.create_scope(
+                fn_def.get_ns(), self.scope_manager.get_scope(fn_ns)
+            )
+        ret_def: Definition = self.def_manager.get(
+            utils.join_ns(fn_def.get_ns(), utils.constants.RETURN_NAME)
+        )
         fn_scope.add_def(utils.constants.RETURN_NAME, ret_def)
         modNs = self.get_module_ns(self.current_ns)
         mod = self.module_manager.get(modNs)
@@ -523,15 +596,26 @@ class ExtProcessor(ProcessingBase):
         tmpargs = node.args.args[:]
         if hasattr(node, "decorator_list"):
             for decorator in node.decorator_list:
-                if isinstance(decorator, ast.Name) and decorator.id == utils.constants.STATIC_METHOD:
+                if (
+                    isinstance(decorator, ast.Name)
+                    and decorator.id == utils.constants.STATIC_METHOD
+                ):
                     is_static_method = True
-        if currentNsDefi.get_type() == utils.constants.CLS_DEF and not is_static_method and node.args.args:
+        if (
+            currentNsDefi.get_type() == utils.constants.CLS_DEF
+            and not is_static_method
+            and node.args.args
+        ):
             arg_ns = utils.join_ns(fn_def.get_ns(), node.args.args[0].arg)
             arg_def = self.def_manager.get(arg_ns)
             if not arg_def:
                 arg_def = self.def_manager.create(arg_ns, utils.constants.PARAM_DEF)
-            arg_def.add_value_point(node.lineno, utils.join_ns(currentNsDefi.get_ns(), 'self'))
-            self.scope_manager.handle_assign(fn_def.get_ns(), node.args.args[0].arg, arg_def)
+            arg_def.add_value_point(
+                node.lineno, utils.join_ns(currentNsDefi.get_ns(), "self")
+            )
+            self.scope_manager.handle_assign(
+                fn_def.get_ns(), node.args.args[0].arg, arg_def
+            )
             tmpargs = node.args.args[1:]
 
         for pos, arg in enumerate(tmpargs):
@@ -544,8 +628,12 @@ class ExtProcessor(ProcessingBase):
         for arg_ns in defs_to_create:
             arg_def = self.def_manager.get(arg_ns)
             if not arg_def:
-                arg_def: Definition = self.def_manager.create(arg_ns, utils.constants.PARAM_DEF)
-            self.scope_manager.handle_assign(fn_def.get_ns(), arg_def.get_name(), arg_def)
+                arg_def: Definition = self.def_manager.create(
+                    arg_ns, utils.constants.PARAM_DEF
+                )
+            self.scope_manager.handle_assign(
+                fn_def.get_ns(), arg_def.get_name(), arg_def
+            )
             arg_name = arg_ns.split(".")[-1]
             if defaults.get(arg_name, None):
                 arg_def.add_value_point(node.lineno, defaults[arg_name])
@@ -597,7 +685,11 @@ class ExtProcessor(ProcessingBase):
         pass
 
     def _get_last_line(self, node):
-        lines = sorted(list(ast.walk(node)), key=lambda x: x.lineno if hasattr(x, "lineno") else 0, reverse=True)
+        lines = sorted(
+            list(ast.walk(node)),
+            key=lambda x: x.lineno if hasattr(x, "lineno") else 0,
+            reverse=True,
+        )
         if not lines:
             return node.lineno
         last = getattr(lines[0], "lineno", node.lineno)
@@ -607,23 +699,27 @@ class ExtProcessor(ProcessingBase):
 
     def visit_ClassDef(self, node):
         cls_ns = self._handle_ns()
-        cls_def: Definition = self.def_manager.handle_class_def(self.current_ns, node.name, cls_ns)
+        cls_def: Definition = self.def_manager.handle_class_def(
+            self.current_ns, node.name, cls_ns
+        )
         cls_scope: ScopeItem = self.scope_manager.get_scope(cls_def.get_ns())
         if not self.scope_manager.get_scope(cls_def.get_ns()):
-            cls_scope = self.scope_manager.create_scope(cls_def.get_ns(), self.scope_manager.get_scope(cls_ns))
+            cls_scope = self.scope_manager.create_scope(
+                cls_def.get_ns(), self.scope_manager.get_scope(cls_ns)
+            )
         cls: ClassNode = self.class_manager.get(cls_def.get_ns())
         if not cls:
             cls: ClassNode = self.class_manager.create(cls_def.get_ns(), self.modname)
         cls_ret = utils.join_ns(cls_def.get_ns(), utils.constants.RETURN_NAME)
         cls_ret_defi: Definition = self.def_manager.get(cls_ret)
-        cls_self = utils.join_ns(cls_def.get_ns(), 'self')
+        cls_self = utils.join_ns(cls_def.get_ns(), "self")
         cls_self_defi: Definition = self.def_manager.get(cls_self)
         if not cls_ret_defi:
             cls_ret_defi = self.def_manager.create(cls_ret, utils.constants.RETURN_DEF)
         cls_scope.add_def(utils.constants.RETURN_NAME, cls_ret_defi)
         if not cls_self_defi:
             cls_self_defi = self.def_manager.create(cls_self, utils.constants.NAME_DEF)
-        cls_scope.add_def('self', cls_self_defi)
+        cls_scope.add_def("self", cls_self_defi)
         cls_ret_defi.add_value_point(node.lineno, [cls_def.get_ns()])
         cls_self_defi.add_value_point(node.lineno, [cls_def.get_ns()])
 
@@ -679,7 +775,9 @@ class ExtProcessor(ProcessingBase):
                 return_defs.append(defi)
             return return_defs
         elif isinstance(node, ast.Lambda):
-            lambda_counter = self.scope_manager.get_scope(self.current_ns).get_lambda_counter()
+            lambda_counter = self.scope_manager.get_scope(
+                self.current_ns
+            ).get_lambda_counter()
             lambda_name = utils.get_lambda_name(lambda_counter)
             return [self.scope_manager.get_def(self.current_ns, lambda_name)]
         elif isinstance(node, ast.Tuple):
@@ -710,13 +808,13 @@ class ExtProcessor(ProcessingBase):
             return defis
         elif isinstance(node, ast.Num):
             # defiNs = utils.join_ns(self.current_ns, '<int>')
-            defiNs = '<int>'
+            defiNs = "<int>"
             defi = self.def_manager.get(defiNs)
             if not defi:
                 defi = self.def_manager.create(defiNs, utils.constants.INT_DEF)
             return [defi]
         elif isinstance(node, ast.Str):
-            defiNs = '<str>'
+            defiNs = "<str>"
             defi = self.def_manager.get(defiNs)
             if not defi:
                 defi = self.def_manager.create(defiNs, utils.constants.STR_DEF)
@@ -725,8 +823,10 @@ class ExtProcessor(ProcessingBase):
             return [node]
         elif isinstance(node, ast.Dict):
             if not self.scope_manager.get_scope(self.current_ns):
-                return ['dict']
-            dict_counter = self.scope_manager.get_scope(self.current_ns).get_dict_counter()
+                return ["dict"]
+            dict_counter = self.scope_manager.get_scope(
+                self.current_ns
+            ).get_dict_counter()
             dict_name = utils.get_dict_name(dict_counter)
             defiNs = utils.join_ns(self.current_ns, dict_name)
             defi = self.def_manager.get(defiNs)
@@ -736,7 +836,9 @@ class ExtProcessor(ProcessingBase):
             scope_def = self.scope_manager.get_def(self.current_ns, dict_name)
             return [self.scope_manager.get_def(self.current_ns, dict_name)]
         elif isinstance(node, ast.List):
-            list_counter = self.scope_manager.get_scope(self.current_ns).get_list_counter()
+            list_counter = self.scope_manager.get_scope(
+                self.current_ns
+            ).get_list_counter()
             list_name = utils.get_list_name(list_counter)
             defiNs = utils.join_ns(self.current_ns, list_name)
             defi = self.def_manager.get(defiNs)
@@ -753,7 +855,7 @@ class ExtProcessor(ProcessingBase):
                     defis.append(defi)
             return defis
         elif isinstance(node, ast.JoinedStr):
-            return ['<str>']
+            return ["<str>"]
         return []
 
     def visit_Call(self, node, decorator=False, decoratorParam=None):
@@ -768,7 +870,9 @@ class ExtProcessor(ProcessingBase):
                             self.def_manager.create(name, utils.constants.FUN_DEF)
                         return [name]
                     else:
-                        curDefi: Definition = self.scope_manager.get_def(self.current_ns, node.id)
+                        curDefi: Definition = self.scope_manager.get_def(
+                            self.current_ns, node.id
+                        )
                         if not curDefi:
                             return []
                         # callDefiNsList = self.getPoint(curDefi.get_ns())
@@ -779,8 +883,15 @@ class ExtProcessor(ProcessingBase):
                     self.visit(node)
                     field = node.attr
                     xDefiList = self.decode_node(node.value)
-                    XPointList = self.getYPOint(node.lineno, xDefiList) if xDefiList else []
-                    xFieldList = list(filter(lambda x: x, (map(lambda x: self.find_field(x, field), XPointList))))
+                    XPointList = (
+                        self.getYPOint(node.lineno, xDefiList) if xDefiList else []
+                    )
+                    xFieldList = list(
+                        filter(
+                            lambda x: x,
+                            (map(lambda x: self.find_field(x, field), XPointList)),
+                        )
+                    )
                     return self.getYPOint(node.lineno, xFieldList)
                     pass
                 elif isinstance(node, ast.Call):
@@ -802,7 +913,9 @@ class ExtProcessor(ProcessingBase):
                         self.def_manager.create(name, utils.constants.FUN_DEF)
                     return [name]
                 else:
-                    curDefi: Definition = self.scope_manager.get_def(self.current_ns, node.func.id)
+                    curDefi: Definition = self.scope_manager.get_def(
+                        self.current_ns, node.func.id
+                    )
                     if not curDefi:
                         return []
                     # callDefiNsList = self.getPoint(curDefi.get_ns())
@@ -814,7 +927,12 @@ class ExtProcessor(ProcessingBase):
                 field = node.func.attr
                 xDefiList = self.decode_node(node.func.value)
                 XPointList = self.getYPOint(node.lineno, xDefiList) if xDefiList else []
-                xFieldList = list(filter(lambda x: x, (map(lambda x: self.find_field(x, field), XPointList))))
+                xFieldList = list(
+                    filter(
+                        lambda x: x,
+                        (map(lambda x: self.find_field(x, field), XPointList)),
+                    )
+                )
                 return self.getYPOint(node.lineno, xFieldList)
                 pass
             elif isinstance(node.func, ast.Call):
@@ -856,7 +974,7 @@ class ExtProcessor(ProcessingBase):
                 if not method:
                     line = node.lineno
                 else:
-                    line = method['first']
+                    line = method["first"]
                 paramList = callScope.params
                 argList = decoratorParam
                 paramsMap = {}
@@ -876,7 +994,10 @@ class ExtProcessor(ProcessingBase):
                             paramsMap[utils.join_ns(callScope.get_ns(), k)] = v
                 for param, arg in paramsMap.items():
                     paramDefi: Definition = self.def_manager.get(param)
-                    if not paramDefi or not paramDefi.get_type() == utils.constants.PARAM_DEF:
+                    if (
+                        not paramDefi
+                        or not paramDefi.get_type() == utils.constants.PARAM_DEF
+                    ):
                         continue
                     if isinstance(arg, str):
                         argsPoint = self.getYPOint(node.lineno, [arg])
@@ -902,7 +1023,7 @@ class ExtProcessor(ProcessingBase):
             if not method:
                 line = node.lineno
             else:
-                line = method['first']
+                line = method["first"]
             paramList = callScope.params
             paramsMap = {}
             for index, param in enumerate(argList):
@@ -921,7 +1042,10 @@ class ExtProcessor(ProcessingBase):
                         paramsMap[utils.join_ns(callScope.get_ns(), k)] = v
             for param, arg in paramsMap.items():
                 paramDefi: Definition = self.def_manager.get(param)
-                if not paramDefi or not paramDefi.get_type() == utils.constants.PARAM_DEF:
+                if (
+                    not paramDefi
+                    or not paramDefi.get_type() == utils.constants.PARAM_DEF
+                ):
                     continue
                 if isinstance(arg, str):
                     # argsPoint = self.getYPOint(node.lineno, [arg])
@@ -942,7 +1066,9 @@ class ExtProcessor(ProcessingBase):
             callDefi: Definition = self.def_manager.get(call)
             if callDefi and callDefi.get_type() != utils.constants.EXT_DEF:
                 self.cg.add_edge(self.current_ns, call)
-            tmp = reduce(lambda x, y: x or y, map(lambda x: x in call, utils.constants.BUILTTYPE))
+            tmp = reduce(
+                lambda x, y: x or y, map(lambda x: x in call, utils.constants.BUILTTYPE)
+            )
             if not callDefi and tmp:
                 self.cg.add_edge(self.current_ns, call)
             self.pushStack(callDefi)
@@ -956,7 +1082,9 @@ class ExtProcessor(ProcessingBase):
                     continue
                 for key, point in callChange.items():
                     if key in outPoint:
-                        outPoint[key] = outPoint[key].union(point.get_last_point_value())
+                        outPoint[key] = outPoint[key].union(
+                            point.get_last_point_value()
+                        )
                     if key not in outPoint:
                         outPoint[key] = point.get_last_point_value()
             out = {}
@@ -972,7 +1100,7 @@ class ExtProcessor(ProcessingBase):
                 scope: ScopeItem = self.scope_manager.get_scope(scopens)
                 if not scope:
                     return
-                field = key[len(scopens) + 1:]
+                field = key[len(scopens) + 1 :]
                 defi: Definition = self.def_manager.get(key)
                 if not defi:
                     defi = self.def_manager.create(key, utils.constants.NAME_DEF)
@@ -980,7 +1108,7 @@ class ExtProcessor(ProcessingBase):
                 scope.add_def(field, defi)
             pass
 
-        if hasattr(node, 'func'):
+        if hasattr(node, "func"):
             self.visit(node.func)
         callList = resolve_call()
         callList = filter(lambda x: x, callList)
@@ -988,12 +1116,14 @@ class ExtProcessor(ProcessingBase):
         list(map(match_call, callList))
         list(map(enter_call, callList))
         if not callList:
-            if hasattr(node, 'args'):
+            if hasattr(node, "args"):
                 self._handle_args(node)
 
         changeDict = merge_change(callList)
         for key, change in changeDict.items():
-            self.change_manager.addChange(self.current_ns, key, node.lineno, change.get_last_point_value())
+            self.change_manager.addChange(
+                self.current_ns, key, node.lineno, change.get_last_point_value()
+            )
         update_change(changeDict)
 
     def _handle_args(self, node):
@@ -1057,27 +1187,53 @@ class ExtProcessor(ProcessingBase):
             return
         self.visit(node.value)
         return_ns = utils.join_ns(self.current_ns, utils.constants.RETURN_NAME)
-        self._handle_assign(return_ns, self.getYPOint(node.lineno, self.decode_node(node.value)), row=node.lineno,
-                            defiType=utils.constants.RETURN_DEF)
+        self._handle_assign(
+            return_ns,
+            self.getYPOint(node.lineno, self.decode_node(node.value)),
+            row=node.lineno,
+            defiType=utils.constants.RETURN_DEF,
+        )
         splitted = return_ns.split(".")
-        self.scope_manager.handle_assign(".".join(splitted[:-1]), splitted[-1], self.def_manager.get(return_ns))
+        self.scope_manager.handle_assign(
+            ".".join(splitted[:-1]), splitted[-1], self.def_manager.get(return_ns)
+        )
 
     def get_modules_analyzed(self):
         return self.modules_analyzed
 
     def analyze_submodules(self):
-        super().analyze_submodules(ExtProcessor, self.import_manager,
-                                   self.scope_manager, self.def_manager, self.class_manager,
-                                   self.module_manager, self.call_manager, self.return_manager, self.cg, self.callStack,
-                                   self.visited_scope,
-                                   modules_analyzed=self.get_modules_analyzed())
+        super().analyze_submodules(
+            ExtProcessor,
+            self.import_manager,
+            self.scope_manager,
+            self.def_manager,
+            self.class_manager,
+            self.module_manager,
+            self.call_manager,
+            self.return_manager,
+            self.cg,
+            self.callStack,
+            self.visited_scope,
+            modules_analyzed=self.get_modules_analyzed(),
+        )
 
     def analyze_submodule(self, imp):
-        super().analyze_submodule(ExtProcessor, imp, self.import_manager,
-                                  self.scope_manager, self.def_manager, self.class_manager,
-                                  self.module_manager, self.change_manager, self.node_manager, self.cg, self.callStack,
-                                  self.visited_scope,
-                                  modules_analyzed=self.get_modules_analyzed(), decy=self.decy)
+        super().analyze_submodule(
+            ExtProcessor,
+            imp,
+            self.import_manager,
+            self.scope_manager,
+            self.def_manager,
+            self.class_manager,
+            self.module_manager,
+            self.change_manager,
+            self.node_manager,
+            self.cg,
+            self.callStack,
+            self.visited_scope,
+            modules_analyzed=self.get_modules_analyzed(),
+            decy=self.decy,
+        )
 
     def visit_Try(self, node):
         for item in node.body:
@@ -1101,14 +1257,13 @@ class ExtProcessor(ProcessingBase):
         try:
             self.visit(ast.parse(self.contents, self.filename))
         except Exception:
-            print(self.filename, 'error')
+            print(self.filename, "error")
         # self.visit(ast.parse(self.contents, self.filename))
 
     def analyze_localfunction(self, localList):
         for local in localList:
             localDefi = self.def_manager.get(local)
             self.pushStack(localDefi, False, True)
-
 
     def analyze_allfunction(self):
         def analyze_local(local):
@@ -1119,24 +1274,26 @@ class ExtProcessor(ProcessingBase):
             for method in list(methodDict.keys()):
                 methodDefi = self.def_manager.get(method)
                 self.pushStack(methodDefi, False, True)
+
         prev = None
+
         def equal(prev):
             if not prev:
                 return False
-            if set(prev.keys()) == set(self.module_manager.get_internal_modules().copy()):
+            if set(prev.keys()) == set(
+                self.module_manager.get_internal_modules().copy()
+            ):
                 return True
             return False
 
         cnt = 0
-        while not equal(prev) :
+        while not equal(prev):
             print("iteration", cnt)
             cnt += 1
             prev = self.module_manager.get_internal_modules().copy()
             for local in self.module_manager.get_internal_modules().copy():
                 analyze_local(local)
         pass
-
-
 
     def is_builtin(self, name):
         return name in __builtins__
@@ -1168,14 +1325,20 @@ class ExtProcessor(ProcessingBase):
     def _handle_ns(self):
         tmpStack = self.callStack[:]
         curNsDefi: Definition = self.def_manager.get(tmpStack[-1])
-        while curNsDefi.get_type() in [utils.constants.IF_DEF, utils.constants.ELSE_DEF, utils.constants.WHILE_DEF]:
+        while curNsDefi.get_type() in [
+            utils.constants.IF_DEF,
+            utils.constants.ELSE_DEF,
+            utils.constants.WHILE_DEF,
+        ]:
             tmpStack.pop()
             curNsDefi = self.def_manager.get(tmpStack[-1])
         finalNs = curNsDefi.get_ns()
         return finalNs
 
     def mergeIfElse(self, ifFullNs, elseFullNs, row):
-        ifChange, elseChange = self.change_manager.getChange(ifFullNs), self.change_manager.getChange(elseFullNs)
+        ifChange, elseChange = self.change_manager.getChange(
+            ifFullNs
+        ), self.change_manager.getChange(elseFullNs)
         returnChangeItem = {}
         if not ifChange and not elseChange:
             pass
@@ -1192,14 +1355,21 @@ class ExtProcessor(ProcessingBase):
                 if key in ifChange and key in elseChange:
                     ifChangeItem: ChangeItem = ifChange[key]
                     elseChangeItem: ChangeItem = elseChange[key]
-                    tmpChangeItem = ChangeItem(row,
-                                               ifChangeItem.get_last_point_value() | elseChangeItem.get_last_point_value())
+                    tmpChangeItem = ChangeItem(
+                        row,
+                        ifChangeItem.get_last_point_value()
+                        | elseChangeItem.get_last_point_value(),
+                    )
                     returnChangeItem[key] = tmpChangeItem
                 elif key in ifChange:
-                    tmpChangeItem = ChangeItem(row, ifChange[key].get_last_point_value(), True)
+                    tmpChangeItem = ChangeItem(
+                        row, ifChange[key].get_last_point_value(), True
+                    )
                     returnChangeItem[key] = tmpChangeItem
                 else:
-                    tmpChangeItem = ChangeItem(row, elseChange[key].get_last_point_value(), True)
+                    tmpChangeItem = ChangeItem(
+                        row, elseChange[key].get_last_point_value(), True
+                    )
                     returnChangeItem[key] = tmpChangeItem
         ifScope: ScopeItem = self.scope_manager.get_scope(ifFullNs)
         elseScope: ScopeItem = self.scope_manager.get_scope(elseFullNs)
@@ -1218,33 +1388,49 @@ class ExtProcessor(ProcessingBase):
             for key in keys:
                 tmpKey = utils.join_ns(self.current_ns, key)
                 if key in ifScope.get_defs() and key in elseScope.get_defs():
-                    returnChangeItem[tmpKey] = ChangeItem(row, ifScope.get_def(
-                        key).get_last_point_value() | elseScope.get_def(key).get_last_point_value())
+                    returnChangeItem[tmpKey] = ChangeItem(
+                        row,
+                        ifScope.get_def(key).get_last_point_value()
+                        | elseScope.get_def(key).get_last_point_value(),
+                    )
                 elif key in ifScope.get_defs():
-                    returnChangeItem[tmpKey] = ChangeItem(row, ifScope.get_def(key).get_last_point_value())
+                    returnChangeItem[tmpKey] = ChangeItem(
+                        row, ifScope.get_def(key).get_last_point_value()
+                    )
                 elif key in elseScope.get_defs():
-                    returnChangeItem[tmpKey] = ChangeItem(row, elseScope.get_def(key).get_last_point_value())
+                    returnChangeItem[tmpKey] = ChangeItem(
+                        row, elseScope.get_def(key).get_last_point_value()
+                    )
         return returnChangeItem
 
     def update(self, row, changeList: dict):
         curNsDefi: Definition = self.def_manager.get(self.current_ns)
-        if curNsDefi.get_type() not in [utils.constants.IF_DEF, utils.constants.WHILE_DEF, utils.constants.ELSE_DEF]:
+        if curNsDefi.get_type() not in [
+            utils.constants.IF_DEF,
+            utils.constants.WHILE_DEF,
+            utils.constants.ELSE_DEF,
+        ]:
             for changedDefiNs, change in changeList.items():
                 changedDefi: Definition = self.def_manager.get(changedDefiNs)
                 if not changedDefi:
-                    changedDefi = self.def_manager.create(changedDefiNs, utils.constants.NAME_DEF)
+                    changedDefi = self.def_manager.create(
+                        changedDefiNs, utils.constants.NAME_DEF
+                    )
                 changedDefi.add_value_point(row, change.get_last_point_value())
                 curScopeNs = self.get_scope_ns(changedDefiNs)
                 curScope: ScopeItem = self.scope_manager.get_scope(curScopeNs)
                 if curScope:
-                    curScope.add_def(changedDefiNs[len(curScopeNs) + 1:], changedDefi)
+                    curScope.add_def(changedDefiNs[len(curScopeNs) + 1 :], changedDefi)
             return
         curChange: dict = self.change_manager.getChange(self.current_ns)
         for defiNs, changePoint in changeList.items():
             if defiNs in curChange:
                 if changePoint.if_union:
-                    curChange[defiNs].addPoint(row,
-                                               changePoint.get_last_point_value() | changePoint.get_last_point_value())
+                    curChange[defiNs].addPoint(
+                        row,
+                        changePoint.get_last_point_value()
+                        | changePoint.get_last_point_value(),
+                    )
                 else:
                     curChange[defiNs].addPoint(row, changePoint.get_last_point_value())
             else:
@@ -1256,17 +1442,23 @@ class ExtProcessor(ProcessingBase):
             curScopeNs = self.get_scope_ns(defiNs)
             curScope: ScopeItem = self.scope_manager.get_scope(curScopeNs)
             if curScope:
-                curScope.add_def(defiNs[len(curScopeNs) + 1:], changedDefi)
+                curScope.add_def(defiNs[len(curScopeNs) + 1 :], changedDefi)
 
     def resolve(self, calleeNs: str, row: int, flag=False) -> list:
         calleeDefi: Definition = self.def_manager.get(calleeNs)
-        tmp = reduce(lambda x, y: x or y, map(lambda x: x in calleeNs, utils.constants.BUILTTYPE))
+        tmp = reduce(
+            lambda x, y: x or y, map(lambda x: x in calleeNs, utils.constants.BUILTTYPE)
+        )
         if not calleeDefi and tmp:
             return [calleeNs]
         if not calleeDefi:
             return [calleeNs]
-        if not calleeDefi or calleeDefi.get_type() in [utils.constants.NAME_DEF, utils.constants.NA_DEF,
-                                                       utils.constants.PARAM_DEF, utils.constants.RETURN_DEF]:
+        if not calleeDefi or calleeDefi.get_type() in [
+            utils.constants.NAME_DEF,
+            utils.constants.NA_DEF,
+            utils.constants.PARAM_DEF,
+            utils.constants.RETURN_DEF,
+        ]:
             nsList = self.get_point(calleeNs, row)
             return list(set(nsList))
         if not calleeDefi:
@@ -1274,15 +1466,19 @@ class ExtProcessor(ProcessingBase):
         if calleeDefi.get_type() in [utils.constants.FUN_DEF, utils.constants.EXT_DEF]:
             return [calleeNs]
         if calleeDefi.get_type() == utils.constants.CLS_DEF:
-            return [utils.join_ns(calleeNs, utils.constants.CLS_INIT)] if flag else [calleeNs]
+            return (
+                [utils.join_ns(calleeNs, utils.constants.CLS_INIT)]
+                if flag
+                else [calleeNs]
+            )
         elif calleeDefi.get_type() == utils.constants.INT_DEF:
-            return ['<int>']
+            return ["<int>"]
         elif calleeDefi.get_type() == utils.constants.STR_DEF:
-            return ['<str>']
+            return ["<str>"]
         elif calleeDefi.get_type() == utils.constants.LIST_DEF:
-            return ['<list>']
+            return ["<list>"]
         elif calleeDefi.get_type() == utils.constants.MAP_DEF:
-            return ['<map>']
+            return ["<map>"]
         else:
             return [calleeNs]
 
@@ -1290,15 +1486,18 @@ class ExtProcessor(ProcessingBase):
         def helper(ns: str):
             rightList = []
             defi: Definition = self.def_manager.get(ns)
-            while not defi or defi.get_type() in [utils.constants.NA_DEF, utils.constants.PARAM_DEF,
-                                                  utils.constants.RETURN_DEF]:
-                rIndex = ns.rfind('.')
+            while not defi or defi.get_type() in [
+                utils.constants.NA_DEF,
+                utils.constants.PARAM_DEF,
+                utils.constants.RETURN_DEF,
+            ]:
+                rIndex = ns.rfind(".")
                 if rIndex == -1:
                     break
                 rightList.insert(0, ns[rIndex:])
                 ns = ns[:rIndex]
                 defi = self.def_manager.get(ns)
-            rIndex = ns.rfind('.')
+            rIndex = ns.rfind(".")
             if rIndex != -1:
                 rightList.insert(0, ns[rIndex:])
                 ns = ns[:rIndex]
@@ -1309,12 +1508,15 @@ class ExtProcessor(ProcessingBase):
         leftList, rightList = helper(ns)
         while rightList:
             leftList = list(
-                map(lambda x: self.mergeLeftRight(x, row, rightList[0]), leftList))
+                map(lambda x: self.mergeLeftRight(x, row, rightList[0]), leftList)
+            )
             rightList.remove(rightList[0])
             leftList = self.flatten(list(map(self.convert, leftList)))
         if not leftList:
             return leftList
-        leftList = list(filter(lambda x: x, self.flatten(list(map(self.convert_final, leftList)))))
+        leftList = list(
+            filter(lambda x: x, self.flatten(list(map(self.convert_final, leftList))))
+        )
         return leftList
 
     def mergeLeftRight(self, left, row, right):
@@ -1345,8 +1547,12 @@ class ExtProcessor(ProcessingBase):
                 if not curDefi:
                     visited.add(cur)
                     continue
-                if curDefi.get_type() in [utils.constants.NAME_DEF, utils.constants.NA_DEF, utils.constants.PARAM_DEF,
-                                          utils.constants.RETURN_DEF]:
+                if curDefi.get_type() in [
+                    utils.constants.NAME_DEF,
+                    utils.constants.NA_DEF,
+                    utils.constants.PARAM_DEF,
+                    utils.constants.RETURN_DEF,
+                ]:
                     PointValueList = curDefi.get_last_point_value()
                     visited = visited.union(set(PointValueList))
                     for pointValue in PointValueList:
@@ -1354,13 +1560,13 @@ class ExtProcessor(ProcessingBase):
                             queue.append(pointValue)
                     continue
                 if curDefi.get_type() == utils.constants.INT_DEF:
-                    visited.add('<int>')
+                    visited.add("<int>")
                 if curDefi.get_type() == utils.constants.STR_DEF:
-                    visited.add('<str>')
+                    visited.add("<str>")
                 if curDefi.get_type() == utils.constants.LIST_DEF:
-                    visited.add('<list>')
+                    visited.add("<list>")
                 if curDefi.get_type() == utils.constants.MAP_DEF:
-                    visited.add('<map>')
+                    visited.add("<map>")
                 visited.add(cur)
             return visited
 
@@ -1368,7 +1574,9 @@ class ExtProcessor(ProcessingBase):
             return [curStr]
         curDefi: Definition = self.def_manager.get(curStr)
         if not curDefi and curStr in self.change_manager.getChange(self.current_ns):
-            changedItem: ChangeItem = self.change_manager.getChange(self.current_ns)[curStr]
+            changedItem: ChangeItem = self.change_manager.getChange(self.current_ns)[
+                curStr
+            ]
             res = []
             pointValueList = changedItem.get_last_point_value()
             for point in pointValueList:
@@ -1379,12 +1587,20 @@ class ExtProcessor(ProcessingBase):
             return list(set(res))
         if not curDefi:
             return [curStr]
-        if curDefi.get_type() in [utils.constants.NAME_DEF, utils.constants.NA_DEF, utils.constants.PARAM_DEF,
-                                  utils.constants.RETURN_DEF]:
+        if curDefi.get_type() in [
+            utils.constants.NAME_DEF,
+            utils.constants.NA_DEF,
+            utils.constants.PARAM_DEF,
+            utils.constants.RETURN_DEF,
+        ]:
             curDefiList = curDefi.get_last_point_value()
             if curStr in self.change_manager.getChange(self.current_ns):
-                curDefiList = curDefiList | self.change_manager.getChange(self.current_ns)[
-                    curStr].get_last_point_value()
+                curDefiList = (
+                    curDefiList
+                    | self.change_manager.getChange(self.current_ns)[
+                        curStr
+                    ].get_last_point_value()
+                )
             nsList = []
             for curDefiNs in curDefiList:
                 # tmpList = self.convert(curDefiNs)
@@ -1397,24 +1613,29 @@ class ExtProcessor(ProcessingBase):
                 nsList = list(set(nsList))
             return nsList
         if curDefi.get_type() == utils.constants.INT_DEF:
-            return ['<int>']
+            return ["<int>"]
         if curDefi.get_type() == utils.constants.STR_DEF:
-            return ['<str>']
+            return ["<str>"]
         if curDefi.get_type() == utils.constants.LIST_DEF:
-            return ['<list>']
+            return ["<list>"]
         if curDefi.get_type() == utils.constants.MAP_DEF:
-            return ['<map>']
+            return ["<map>"]
         return [curStr]
 
     def convert_final(self, curStr):
         curDefi: Definition = self.def_manager.get(curStr)
-        tmp = reduce(lambda x, y: x or y, map(lambda x: x in curStr, utils.constants.BUILTTYPE))
+        tmp = reduce(
+            lambda x, y: x or y, map(lambda x: x in curStr, utils.constants.BUILTTYPE)
+        )
         if not curDefi and tmp:
             return curStr
         if not curDefi:
             return None
-        if curDefi.get_type() in [utils.constants.NAME_DEF, utils.constants.PARAM_DEF,
-                                  utils.constants.RETURN_DEF]:
+        if curDefi.get_type() in [
+            utils.constants.NAME_DEF,
+            utils.constants.PARAM_DEF,
+            utils.constants.RETURN_DEF,
+        ]:
             curDefiList = curDefi.get_last_point_value()
             nsList = []
             for curDefiNs in curDefiList:
@@ -1423,13 +1644,13 @@ class ExtProcessor(ProcessingBase):
                 nsList.append(curDefiNs)
             return nsList
         if curDefi.get_type() == utils.constants.INT_DEF:
-            return '<int>'
+            return "<int>"
         if curDefi.get_type() == utils.constants.STR_DEF:
-            return '<str>'
+            return "<str>"
         if curDefi.get_type() == utils.constants.LIST_DEF:
-            return '<list>'
+            return "<list>"
         if curDefi.get_type() == utils.constants.MAP_DEF:
-            return '<map>'
+            return "<map>"
         if curDefi.get_type() == utils.constants.NA_DEF:
             return None
         return curStr
@@ -1437,7 +1658,7 @@ class ExtProcessor(ProcessingBase):
     def get_module_ns(self, ns):
         defi: Definition = self.def_manager.get(ns)
         while not defi or defi.get_type() != utils.constants.MOD_DEF:
-            ns = ns[:ns.rfind(".")]
+            ns = ns[: ns.rfind(".")]
             if not ns:
                 break
             defi = self.def_manager.get(ns)
@@ -1445,21 +1666,21 @@ class ExtProcessor(ProcessingBase):
 
     def get_scope_ns(self, ns):
         while ns and not ns in self.scope_manager.get_scopes():
-            ns = ns[:ns.rfind(".")]
+            ns = ns[: ns.rfind(".")]
         return ns if ns else None
 
     def find_field(self, scopeNs, field):
         if scopeNs in ["<str>", "<list>", "<map>", "<int>"]:
-            if scopeNs == '<str>':
+            if scopeNs == "<str>":
                 if hasattr(str, field):
                     return utils.join_ns(scopeNs, field)
-            if scopeNs == '<list>':
+            if scopeNs == "<list>":
                 if hasattr(list, field):
                     return utils.join_ns(scopeNs, field)
-            if scopeNs == '<map>':
+            if scopeNs == "<map>":
                 if hasattr(dict, field):
                     return utils.join_ns(scopeNs, field)
-            if scopeNs == '<int>':
+            if scopeNs == "<int>":
                 if hasattr(int, field):
                     return utils.join_ns(scopeNs, field)
             return None
@@ -1484,7 +1705,7 @@ class ExtProcessor(ProcessingBase):
             if not tmpScope:
                 continue
             if tmpScope.get_def(fn):
-                selfDefi: Definition = tmpScope.get_def('self')
+                selfDefi: Definition = tmpScope.get_def("self")
                 if not selfDefi:
                     continue
                 selfDefi.add_value_point(0, clsNs)

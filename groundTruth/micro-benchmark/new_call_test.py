@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class NewCallTest(TestBase):
     snippet_dir = "newCase/calls"

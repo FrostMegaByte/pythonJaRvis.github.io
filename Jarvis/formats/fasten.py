@@ -6,6 +6,7 @@ from .base import BaseFormatter
 
 import utils
 
+
 class Fasten(BaseFormatter):
     def __init__(self, cg_generator, package, product, forge, version, timestamp):
         self.cg_generator = cg_generator
@@ -36,7 +37,7 @@ class Fasten(BaseFormatter):
                 if not name.startswith(modname + "."):
                     raise Exception("name should start with modname", name, modname)
 
-                cleared = name[len(modname)+1:]
+                cleared = name[len(modname) + 1 :]
 
         suffix = ""
         if name in self.functions:
@@ -46,7 +47,7 @@ class Fasten(BaseFormatter):
 
     def to_external_uri(self, modname, name=""):
         if modname == utils.constants.BUILTIN_NAME:
-            name = name[len(modname)+1:]
+            name = name[len(modname) + 1 :]
             modname = ".builtin"
 
         return "//{}//{}".format(modname.replace("-", "_"), name)
@@ -129,7 +130,9 @@ class Fasten(BaseFormatter):
                     end = (val, True)
             add_range(begin, end)
 
-            res.append({"forge": "PyPI", "product": req.name, "constraints": constraints})
+            res.append(
+                {"forge": "PyPI", "product": req.name, "constraints": constraints}
+            )
 
         return res
 
@@ -141,18 +144,16 @@ class Fasten(BaseFormatter):
             filename = module["filename"]
             namespaces = module["methods"]
 
-            mods[name] = {
-                "sourceFile": filename,
-                "namespaces": {}
-            }
+            mods[name] = {"sourceFile": filename, "namespaces": {}}
 
             for namespace, info in namespaces.items():
-                namespace_uri = self.to_uri(modname, info['name'])
+                namespace_uri = self.to_uri(modname, info["name"])
 
                 unique = self.get_unique_and_increment()
                 mods[name]["namespaces"][unique] = dict(
-                        namespace=namespace_uri,
-                        metadata=dict(first=info['first'], last=info['last']))
+                    namespace=namespace_uri,
+                    metadata=dict(first=info["first"], last=info["last"]),
+                )
                 self.namespace_map[namespace_uri] = unique
 
         return mods
@@ -187,10 +188,7 @@ class Fasten(BaseFormatter):
         return namespaces_maps
 
     def get_graph(self):
-        graph = {
-            "internalCalls": [],
-            "externalCalls": []
-        }
+        graph = {"internalCalls": [], "externalCalls": []}
 
         internal, external = self.create_namespaces_map()
 
@@ -208,15 +206,9 @@ class Fasten(BaseFormatter):
             if len(uris) == 2:
                 # internal uris have been converted to ints
                 if type(uris[1]) == str and uris[1].startswith("//"):
-                    graph["externalCalls"].append([
-                        uris[0],
-                        uris[1]
-                    ])
+                    graph["externalCalls"].append([uris[0], uris[1]])
                 else:
-                    graph["internalCalls"].append([
-                        uris[0],
-                        uris[1]
-                    ])
+                    graph["internalCalls"].append([uris[0], uris[1]])
         return graph
 
     def generate(self):
@@ -229,5 +221,5 @@ class Fasten(BaseFormatter):
             "timestamp": self.timestamp,
             "modules": self.get_modules(),
             "cha": self.class_hiearchy(),
-            "graph": self.get_graph()
+            "graph": self.get_graph(),
         }

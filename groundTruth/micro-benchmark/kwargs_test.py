@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class KwargsTest(TestBase):
     snippet_dir = "kwargs"

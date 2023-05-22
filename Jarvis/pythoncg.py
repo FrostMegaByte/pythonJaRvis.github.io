@@ -3,7 +3,12 @@ import os
 
 from processing.extProcessor import ExtProcessor
 from machinery.scopes import ScopeManager, ScopeItem
-from machinery.definitions import DefinitionManager, Definition,ChangeManager,ChangeItem
+from machinery.definitions import (
+    DefinitionManager,
+    Definition,
+    ChangeManager,
+    ChangeItem,
+)
 from machinery.imports import ImportManager
 from machinery.classes import ClassManager, ClassNode
 from machinery.returns import ReturnManager
@@ -15,7 +20,17 @@ import utils
 
 
 class CallGraphGenerator(object):
-    def __init__(self, entry_points, package, max_iter, operation ,decy=False,moduleEntry=[],precision = False,demand_ratios = 0):
+    def __init__(
+        self,
+        entry_points,
+        package,
+        max_iter,
+        operation,
+        decy=False,
+        moduleEntry=[],
+        precision=False,
+        demand_ratios=0,
+    ):
         self.entry_points = entry_points
         self.package = package
         self.state = None
@@ -36,22 +51,25 @@ class CallGraphGenerator(object):
         self.change_manager = ChangeManager()
         self.return_manager = ReturnManager()
         self.cg = CallGraph()
-        self.node_manager:NodeManager = NodeManager()
+        self.node_manager: NodeManager = NodeManager()
         gol._init()
         if self.precision:
-            gol.set_value('precision',self.precision)
+            gol.set_value("precision", self.precision)
+
     def extract_state(self):
         state = {}
         state["defs"] = {}
         for key, defi in self.def_manager.get_defs().items():
             state["defs"][key] = {
                 "names": defi.get_name_pointer().get().copy(),
-                "lit": defi.get_lit_pointer().get().copy()
+                "lit": defi.get_lit_pointer().get().copy(),
             }
 
         state["scopes"] = {}
         for key, scope in self.scope_manager.get_scopes().items():
-            state["scopes"][key] = set([x.get_ns() for (_, x) in scope.get_defs().items()])
+            state["scopes"][key] = set(
+                [x.get_ns() for (_, x) in scope.get_defs().items()]
+            )
 
         state["classes"] = {}
         for key, ch in self.class_manager.get_classes().items():
@@ -62,22 +80,21 @@ class CallGraphGenerator(object):
         for key, scope in self.scope_manager.get_scopes().items():
             scope.reset_counters()
 
-
     def remove_import_hooks(self):
         self.import_manager.remove_hooks()
 
-
     def _get_mod_name(self, entry, pkg):
-        input_mod = utils.to_mod_name(
-            os.path.relpath(entry, pkg))
+        input_mod = utils.to_mod_name(os.path.relpath(entry, pkg))
         if input_mod.endswith("__init__"):
             input_mod = ".".join(input_mod.split(".")[:-1])
 
         return input_mod
 
-    def do_pass(self, cls, install_hooks=False,modules_analyzed=set(), *args, **kwargs):
+    def do_pass(
+        self, cls, install_hooks=False, modules_analyzed=set(), *args, **kwargs
+    ):
         modules_analyzed = modules_analyzed
-        processor:ExtProcessor = None
+        processor: ExtProcessor = None
         input_pkg = None
         for entry_point in self.entry_points:
             input_pkg = self.package
@@ -90,8 +107,14 @@ class CallGraphGenerator(object):
             if install_hooks:
                 self.import_manager.set_pkg(input_pkg)
                 self.import_manager.install_hooks()
-            processor = cls(input_file, input_mod,
-                            modules_analyzed=modules_analyzed, decy=self.decy, *args, **kwargs)
+            processor = cls(
+                input_file,
+                input_mod,
+                modules_analyzed=modules_analyzed,
+                decy=self.decy,
+                *args,
+                **kwargs
+            )
             self.module_manager.add_local_modules(input_mod)
             processor.analyze()
             modules_analyzed = modules_analyzed.union(processor.get_modules_analyzed())
@@ -108,12 +131,24 @@ class CallGraphGenerator(object):
                 for method in methodDict.keys():
                     self.moduleEntry.append(method)
         processor.analyze_localfunction(self.moduleEntry)
+
     def analyze(self):
         import time
+
         start = time.time()
-        self.do_pass(ExtProcessor, True,set(),
-                     self.import_manager, self.scope_manager, self.def_manager,
-                     self.class_manager, self.module_manager, self.change_manager, self.node_manager,self.cg)
+        self.do_pass(
+            ExtProcessor,
+            True,
+            set(),
+            self.import_manager,
+            self.scope_manager,
+            self.def_manager,
+            self.class_manager,
+            self.module_manager,
+            self.change_manager,
+            self.node_manager,
+            self.cg,
+        )
         end = time.time()
         print(end - start)
 
@@ -133,9 +168,10 @@ class CallGraphGenerator(object):
         res = {}
         for mod, node in mods.items():
             res[mod] = {
-                "filename": os.path.relpath(node.get_filename(), self.package) \
-                    if node.get_filename() else None,
-                "methods": node.get_methods()
+                "filename": os.path.relpath(node.get_filename(), self.package)
+                if node.get_filename()
+                else None,
+                "methods": node.get_methods(),
             }
         return res
 
@@ -157,13 +193,9 @@ class CallGraphGenerator(object):
         for cls, node in self.class_manager.get_classes().items():
             classes[cls] = {
                 "mro": node.get_mro(),
-                "module": node.get_module()
+                "module": node.get_module(),
             }
         return classes
 
     def get_as_graph(self):
         return self.def_manager.get_defs().items()
-
-
-
-
