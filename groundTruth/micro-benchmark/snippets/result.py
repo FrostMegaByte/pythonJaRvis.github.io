@@ -12,12 +12,11 @@ def run(truth, pycg, pythoncg):
         pycgJson: dict = json.load(f)
     with open(pythoncg, "r") as f:
         pythoncgJson: dict = json.load(f)
+
+    # Result array contains [TP, FP, FN, edges]
     pycg_res = getResult(truthJson, pycgJson)
     python_res = getResult(truthJson, pythoncgJson)
-    if python_res[1] or python_res[2]:
-        print(pythoncg)
-    # if pycg_res[1] or pycg_res[2]:
-    #     print(pycg)
+
     return pycg_res, python_res
 
 
@@ -36,32 +35,29 @@ def getTP(truthJson, curJson):
     return cnt
 
 
-# 假阴 多边
 def getFN(truthJson, curJson, TP):
     return getEdges(truthJson) - TP
 
 
-# 假阳 错边
 def getFP(truthJson, curJson, TP):
     return getEdges(curJson) - TP
 
 
 def getResult(truthJson: dict, curJson: dict):
-    tp = getTP(truthJson, curJson)
+    TP = getTP(truthJson, curJson)
+    FP = getFP(truthJson, curJson, TP)
+    FN = getFN(truthJson, curJson, TP)
     edges = getEdges(truthJson)
-    FP, FN = getFP(truthJson, curJson, tp), getFN(truthJson, curJson, tp)
-    return [tp, FP, FN, edges]
-    # return "{},{},{}/{}".format(tp,FN,FP,edges)
+    return [TP, FP, FN, edges]
 
 
-def getTime(pycgPath, pythonPath):
+def getMem(pycgPath, pythonPath):
     pycgmem = 0
     pythonmem = 0
     with open(pycgPath, "r") as f:
         lines = f.read().split("\n")
     for line in lines:
         line = line.strip()
-        # print(line)
         if line.endswith("maximum resident set size"):
             res = line.replace("maximum resident set size", "")
             res = int(res)
@@ -70,7 +66,6 @@ def getTime(pycgPath, pythonPath):
         lines = f.read().split("\n")
     for line in lines:
         line = line.strip()
-        # print(line)
         if line.endswith("maximum resident set size"):
             res = line.replace("maximum resident set size", "")
             res = int(res)
@@ -81,35 +76,19 @@ def getTime(pycgPath, pythonPath):
 
 def findFile(base):
     for root, ds, fs in os.walk(base):
-        # returnList = [0] * 3
-        # for f in fs:
-        #     if f == "callgraph.json":
-        #         fullname = os.path.join(root, f)
-        #         returnList[0] = fullname
-        #     if f == 'pycg.json':
-        #         fullname = os.path.join(root, f)
-        #         returnList[1] = fullname
-        #     if f == 'pythonCG.json':
-        #         fullname = os.path.join(root, f)
-        #         returnList[2] = fullname
-        returnList = [0] * 2
+        returnList = [0] * 3
         for f in fs:
-            if f == "pycg.json":
+            if f == "callgraph.json":
                 fullname = os.path.join(root, f)
                 returnList[0] = fullname
-            if f == "pythonCG.json":
+            if f == "pycg.json":
                 fullname = os.path.join(root, f)
                 returnList[1] = fullname
-        # yield run(returnList[0] , returnList[1] , returnList[2])
-        yield getTime(returnList[0, returnList[1]])
-        # main(returnList[0] , returnList[1]  ,returnList[2])
-
-
-def process(pycg_list, pythoncg_list):
-    pre_pycg = [0, 0, 0, 0]
-    pre_python = [0, 0, 0, 0]
-    pre_pycg = list(map(lambda x: x[0] + x[1], zip(pre_pycg, pycg_list)))
-    yield pre_pycg
+            if f == "pythonCG.json":
+                fullname = os.path.join(root, f)
+                returnList[2] = fullname
+        yield run(returnList[0], returnList[1], returnList[2])
+        yield getMem(returnList[0], returnList[1])
 
 
 global_pycg = [0, 0, 0, 0]
@@ -118,24 +97,21 @@ global_pythoncg = [0, 0, 0, 0]
 
 def main(index, base):
     def save_xlsx(index, name, res):
-        filename = "/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets/micro.xlsx"
         from openpyxl import load_workbook
 
+        filename = "D:/Documents/TU Delft/Year 6/Master's Thesis/Jarvis/groundTruth/micro-benchmark/snippets/micro.xlsx"
         wb = load_workbook(filename=filename)
         sheet = wb["Sheet1"]
         tmprow = index
         col = 3
         for j, tmp in enumerate(res[:4]):
             tmpcol = col + j
-            # print(tmprow, tmpcol, tmp)
-            # print(sheet.cell(tmprow,tmpcol).value,end = '\t')
             sheet.cell(tmprow, tmpcol, value=tmp)
         print()
         sheet.cell(tmprow, 1, value=name)
         col = 7
         for j, tmp in enumerate(res[4:]):
             tmpcol = col + j
-            # print(sheet.cell(tmprow,tmpcol).value , end ='\t')
             sheet.cell(tmprow, tmpcol, value=tmp)
         print()
         wb.save(filename)
@@ -150,18 +126,18 @@ def main(index, base):
             continue
         pre_pycg = list(map(lambda x: x[0] + x[1], zip(pre_pycg, list(i[0]))))
         pre_python = list(map(lambda x: x[0] + x[1], zip(pre_python, list(i[1]))))
-        # print(pre_pycg,pre_python)
+
     pycg_str = "{},{},{}/{}".format(*pre_pycg)
     python_str = "{},{},{}/{}".format(*pre_python)
     res = pre_pycg + pre_python
-    # save_xlsx(190+index,base.split(os.path.sep)[-1],res)
+    save_xlsx(5 + index, base.split(os.path.sep)[-1], res)
     print(base.split(os.path.sep)[-1])
     print(pycg_str, python_str)
     global_pycg = list(map(lambda x: x[0] + x[1], zip(pre_pycg, global_pycg)))
     global_pythoncg = list(map(lambda x: x[0] + x[1], zip(pre_python, global_pythoncg)))
 
 
-SNIPPETS_PATH = "/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets"
+SNIPPETS_PATH = "D:/Documents/TU Delft/Year 6/Master's Thesis/Jarvis/groundTruth/micro-benchmark/snippets"
 entries = [
     f"{SNIPPETS_PATH}/assignments",
     f"{SNIPPETS_PATH}/builtins",

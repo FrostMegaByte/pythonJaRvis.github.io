@@ -8,7 +8,6 @@ def getMem(pycgPath, pythonPath):
         lines = f.read().split("\n")
     for line in lines:
         line = line.strip()
-        # print(line)
         if line.endswith("maximum resident set size"):
             res = line.replace("maximum resident set size", "")
             res = int(res)
@@ -17,7 +16,6 @@ def getMem(pycgPath, pythonPath):
         lines = f.read().split("\n")
     for line in lines:
         line = line.strip()
-        # print(line)
         if line.endswith("maximum resident set size"):
             res = line.replace("maximum resident set size", "")
             res = int(res)
