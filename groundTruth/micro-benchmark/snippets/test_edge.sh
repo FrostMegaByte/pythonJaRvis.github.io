@@ -4,8 +4,8 @@
 #########################################################################
 
 start_pycg () {
-  entry="/Users/yixuanyan/yyx/github/supplychain/YanYiXuan/pythonCG/main.py"
-	for element in `ls "$1"`
+  entry="/Users/yixuanyan/yyx/github/supplychain/callGraph/pythonCG/micro-benchmark/snippets/getEdge.py"
+	for element in $(ls "$1")
 	do
 		file=$1"/"$element
 		if [ -d "$file" ]
@@ -13,7 +13,7 @@ start_pycg () {
 			start_pycg "$file"
 		elif [ "${file##*.}"x = "py"x ]
 		then
-			if [ ${file##*/}x = 'main.py'x ]
+			if [ "${file##*/}"x = 'main.py'x ]
 			then
 			  curDir_pycg="${file%/*}/test_pycg.json"
 				curDir_pythonCG="${file%/*}/test_pythonCG.json"

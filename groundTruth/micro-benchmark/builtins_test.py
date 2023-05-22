@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class BuiltinsTest(TestBase):
     snippet_dir = "builtins"

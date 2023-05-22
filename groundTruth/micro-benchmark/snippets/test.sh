@@ -9,7 +9,7 @@
 
 start_pycg () {
   entry="/Users/yixuanyan/yyx/github/supplychain/YanYiXuan/pythonCG/main.py"
-	for element in `ls "$1"`
+	for element in $(ls "$1")
 	do
 		file=$1"/"$element
 		if [ -d "$file" ]
@@ -17,7 +17,7 @@ start_pycg () {
 			start_pycg "$file"
 		elif [ "${file##*.}"x = "py"x ]
 		then
-			if [ ${file##*/}x = 'main.py'x ]
+			if [ "${file##*/}"x = 'main.py'x ]
 			then
 				# Normal PyCG usage (uncomment the following line 2 lines)
 				# curDir_pycg="${file%/*}/pycg.json"

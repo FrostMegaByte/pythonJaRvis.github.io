@@ -6,11 +6,13 @@ import copy
 
 import utils
 
+
 def get_custom_loader(ig_obj):
     """
     Closure which returns a custom loader
     that modifies an ImportManager object
     """
+
     class CustomLoader(importlib.abc.SourceLoader):
         def __init__(self, fullname, path):
             self.fullname = fullname
@@ -28,6 +30,7 @@ def get_custom_loader(ig_obj):
             return ""
 
     return CustomLoader
+
 
 class ImportManager(object):
     def __init__(self):
@@ -70,7 +73,6 @@ class ImportManager(object):
 
         node["imports"].add(dest)
 
-
     def _clear_caches(self):
         importlib.invalidate_caches()
         sys.path_importer_cache.clear()
@@ -104,7 +106,6 @@ class ImportManager(object):
             return []
         return self.import_graph[modname]["imports"]
 
-
     def _is_init_file(self):
         return self.input_file.endswith("__init__.py")
 
@@ -127,7 +128,7 @@ class ImportManager(object):
         return mod_name, ".".join(package)
 
     def _do_import(self, mod_name, package):
-        if mod_name == 'pdb':
+        if mod_name == "pdb":
             return
         if mod_name in sys.modules:
             mod = sys.modules[mod_name]
@@ -135,14 +136,14 @@ class ImportManager(object):
             if not hasattr(mod, "__file__") or not mod.__file__:
                 return
             self.create_node(mod_name)
-            self.set_filepath(mod_name,mod.__file__)
+            self.set_filepath(mod_name, mod.__file__)
             return sys.modules[mod_name]
         module_spec = importlib.util.find_spec(mod_name, package=package)
         if module_spec is None:
             return importlib.import_module(mod_name, package=package)
         return importlib.util.module_from_spec(module_spec)
 
-    def handle_import(self, name, level,curScope=None):
+    def handle_import(self, name, level, curScope=None):
         # We currently don't support builtin modules because they're frozen.
         # Add an edge and continue.
         root = name.split(".")[0]
@@ -158,10 +159,12 @@ class ImportManager(object):
 
         parent = ".".join(mod_name.split(".")[:-1])
         parent_name = ".".join(name.split(".")[:-1])
-        combos = [(mod_name, package),
-                (parent, package),
-                (utils.join_ns(package, name), ""),
-                (utils.join_ns(package, parent_name), "")]
+        combos = [
+            (mod_name, package),
+            (parent, package),
+            (utils.join_ns(package, name), ""),
+            (utils.join_ns(package, parent_name), ""),
+        ]
 
         mod = None
         for mn, pkg in combos:
@@ -182,8 +185,7 @@ class ImportManager(object):
         if fname.endswith("__init__.py"):
             fname = os.path.split(fname)[0]
 
-        return utils.to_mod_name(
-            os.path.relpath(fname, self.mod_dir))
+        return utils.to_mod_name(os.path.relpath(fname, self.mod_dir))
 
     def get_import_graph(self):
         return self.import_graph
@@ -193,7 +195,9 @@ class ImportManager(object):
         self.old_path_hooks = copy.deepcopy(sys.path_hooks)
         self.old_path = copy.deepcopy(sys.path)
         loader_details = loader, importlib.machinery.all_suffixes()
-        sys.path_hooks.insert(0, importlib.machinery.FileFinder.path_hook(loader_details))
+        sys.path_hooks.insert(
+            0, importlib.machinery.FileFinder.path_hook(loader_details)
+        )
         sys.path.insert(0, os.path.abspath(self.mod_dir))
         sys.path.append(os.path.abspath(self.mod_dir))
         self._clear_caches()
@@ -203,6 +207,7 @@ class ImportManager(object):
         sys.path = self.old_path
 
         self._clear_caches()
+
 
 class ImportManagerError(Exception):
     pass

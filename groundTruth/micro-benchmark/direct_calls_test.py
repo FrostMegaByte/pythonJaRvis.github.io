@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class DirectCallsTest(TestBase):
     snippet_dir = "direct_calls"
