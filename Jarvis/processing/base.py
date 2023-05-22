@@ -1,10 +1,8 @@
-
 import ast
 import os
 
 import utils
 from machinery.definitions import Definition
-
 
 
 class ProcessingBase(ast.NodeVisitor):
@@ -76,7 +74,7 @@ class ProcessingBase(ast.NodeVisitor):
         self.method_stack.pop()
         self.name_stack.pop()
 
-    def visit_While(self,node, while_name=None):
+    def visit_While(self, node, while_name=None):
         self.name_stack.append(while_name)
         self.method_stack.append(while_name)
         for stmt in node.body:
@@ -84,7 +82,7 @@ class ProcessingBase(ast.NodeVisitor):
         self.method_stack.pop()
         self.name_stack.pop()
 
-    def visit_else(self,node , else_name = None):
+    def visit_else(self, node, else_name=None):
         self.name_stack.append(else_name)
         self.method_stack.append(else_name)
         for stmt in node.orelse:
@@ -92,8 +90,8 @@ class ProcessingBase(ast.NodeVisitor):
         self.method_stack.pop()
         self.name_stack.pop()
 
-    def visit_while_else(self,node,else_name=None):
-        self.visit_else(node,else_name)
+    def visit_while_else(self, node, else_name=None):
+        self.visit_else(node, else_name)
 
     def visit_For(self, node):
         for item in node.body:
@@ -152,7 +150,7 @@ class ProcessingBase(ast.NodeVisitor):
         clsRetDefi: Definition = self.def_manager.get(clsRetNs)
         if not clsRetDefi:
             clsRetDefi = self.def_manager.create(clsRetNs, utils.constants.NAME_DEF)
-        clsSelfNs = utils.join_ns(self.current_ns, 'self')
+        clsSelfNs = utils.join_ns(self.current_ns, "self")
         clsSelfDefi: Definition = self.def_manager.get(clsSelfNs)
         if not clsSelfDefi:
             clsSelfDefi = self.def_manager.create(clsSelfNs, utils.constants.NAME_DEF)
@@ -167,8 +165,10 @@ class ProcessingBase(ast.NodeVisitor):
         for elt in node.elts:
             self.visit(elt)
 
-    def _handle_assign(self, targetns, decoded, row = 0, defiType = utils.constants.NAME_DEF):
-        defi:Definition = self.def_manager.get(targetns)
+    def _handle_assign(
+        self, targetns, decoded, row=0, defiType=utils.constants.NAME_DEF
+    ):
+        defi: Definition = self.def_manager.get(targetns)
         if not defi:
             defi = self.def_manager.create(targetns, defiType)
         if defi.get_type == utils.constants.NA_DEF:
@@ -177,7 +177,7 @@ class ProcessingBase(ast.NodeVisitor):
             iter(decoded)
         except TypeError:
             return defi
-        defi.add_value_point(row,decoded)
+        defi.add_value_point(row, decoded)
         return defi
 
     def _visit_return(self, node):
@@ -188,8 +188,6 @@ class ProcessingBase(ast.NodeVisitor):
 
         return_ns = utils.join_ns(self.current_ns, utils.constants.RETURN_NAME)
         self._handle_assign(return_ns, self.decode_node(node.value))
-
-
 
     def _visit_assign(self, value, targets):
         self.visit(value)
@@ -210,7 +208,9 @@ class ProcessingBase(ast.NodeVisitor):
                         continue
                     defi = self._handle_assign(tns, decoded)
                     splitted = tns.split(".")
-                    self.scope_manager.handle_assign(".".join(splitted[:-1]), splitted[-1], defi)
+                    self.scope_manager.handle_assign(
+                        ".".join(splitted[:-1]), splitted[-1], defi
+                    )
 
         for target in targets:
             do_assign(decoded, target)
@@ -226,7 +226,9 @@ class ProcessingBase(ast.NodeVisitor):
                     continue
                 return_ns = utils.constants.INVALID_NAME
                 if called_def.get_type() == utils.constants.FUN_DEF:
-                    return_ns = utils.join_ns(called_def.get_ns(), utils.constants.RETURN_NAME)
+                    return_ns = utils.join_ns(
+                        called_def.get_ns(), utils.constants.RETURN_NAME
+                    )
                 elif called_def.get_type() == utils.constants.CLS_DEF:
                     return_ns = called_def.get_ns()
                 elif called_def.get_type() == utils.constants.EXT_DEF:
@@ -237,7 +239,9 @@ class ProcessingBase(ast.NodeVisitor):
 
             return return_defs
         elif isinstance(node, ast.Lambda):
-            lambda_counter = self.scope_manager.get_scope(self.current_ns).get_lambda_counter()
+            lambda_counter = self.scope_manager.get_scope(
+                self.current_ns
+            ).get_lambda_counter()
             lambda_name = utils.get_lambda_name(lambda_counter)
             return [self.scope_manager.get_def(self.current_ns, lambda_name)]
         elif isinstance(node, ast.Tuple):
@@ -269,12 +273,16 @@ class ProcessingBase(ast.NodeVisitor):
         elif self._is_literal(node):
             return [node]
         elif isinstance(node, ast.Dict):
-            dict_counter = self.scope_manager.get_scope(self.current_ns).get_dict_counter()
+            dict_counter = self.scope_manager.get_scope(
+                self.current_ns
+            ).get_dict_counter()
             dict_name = utils.get_dict_name(dict_counter)
             scope_def = self.scope_manager.get_def(self.current_ns, dict_name)
             return [self.scope_manager.get_def(self.current_ns, dict_name)]
         elif isinstance(node, ast.List):
-            list_counter = self.scope_manager.get_scope(self.current_ns).get_list_counter()
+            list_counter = self.scope_manager.get_scope(
+                self.current_ns
+            ).get_list_counter()
             list_name = utils.get_list_name(list_counter)
             scope_def = self.scope_manager.get_def(self.current_ns, list_name)
             return [self.scope_manager.get_def(self.current_ns, list_name)]
@@ -296,7 +304,6 @@ class ProcessingBase(ast.NodeVisitor):
         if not isinstance(node, ast.Attribute):
             raise Exception("The node is not an attribute")
 
-
         decoded = self.decode_node(node.value)
         if not decoded:
             return set()
@@ -307,7 +314,6 @@ class ProcessingBase(ast.NodeVisitor):
                 continue
             names.add(name.get_ns())
         return names
-
 
     def _retrieve_parent_names(self, node):
         if not isinstance(node, ast.Attribute):
@@ -321,7 +327,9 @@ class ProcessingBase(ast.NodeVisitor):
         for parent in decoded:
             if not parent or not isinstance(parent, Definition):
                 continue
-            if getattr(self, "closured", None) and self.closured.get(parent.get_ns(), None):
+            if getattr(self, "closured", None) and self.closured.get(
+                parent.get_ns(), None
+            ):
                 names = names.union(self.closured.get(parent.get_ns()))
             else:
                 names.add(parent.get_ns())
@@ -342,7 +350,10 @@ class ProcessingBase(ast.NodeVisitor):
                     cls_names = self.find_cls_fun_ns(defi.get_ns(), node.attr)
                     if cls_names:
                         names = names.union(cls_names)
-                if defi.get_type() in [utils.constants.FUN_DEF, utils.constants.MOD_DEF]:
+                if defi.get_type() in [
+                    utils.constants.FUN_DEF,
+                    utils.constants.MOD_DEF,
+                ]:
                     names.add(utils.join_ns(name, node.attr))
                 if defi.get_type() == utils.constants.EXT_DEF:
                     if node.attr in name:
@@ -405,7 +416,6 @@ class ProcessingBase(ast.NodeVisitor):
         if not isinstance(node, ast.Subscript):
             raise Exception("The node is not an subcript")
 
-
         if getattr(node.slice, "value", None) and self._is_literal(node.slice.value):
             sl_names = [node.slice.value]
         else:
@@ -439,7 +449,6 @@ class ProcessingBase(ast.NodeVisitor):
 
         return full_names
 
-
     def analyze_submodules(self, cls, *args, **kwargs):
         imports = self.import_manager.get_imports(self.modname)
 
@@ -463,11 +472,13 @@ class ProcessingBase(ast.NodeVisitor):
         self.merge_modules_analyzed(visitor.get_modules_analyzed())
 
         self.setMod()
+
     def setMod(self):
         imp = self.module_manager.get(self.get_module_ns(self.current_ns))
         if not imp:
             print()
         self.import_manager.set_current_mod(imp.name, imp.filename)
+
     def find_cls_fun_ns(self, cls_name, fn):
         cls = self.class_manager.get(cls_name)
         if not cls:

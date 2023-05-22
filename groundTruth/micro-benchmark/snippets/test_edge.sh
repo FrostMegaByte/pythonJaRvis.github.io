@@ -1,8 +1,8 @@
+#!/bin/bash
 #########################################################################
 # File Name:    test_edge.sh
-#!/bin/bash
 start_pycg(){
-  entry='/Users/yixuanyan/yyx/github/supplychain/callGraph/pythonCG/micro-benchmark/snippets/getEdege.py'
+  entry='/Users/yixuanyan/yyx/github/supplychain/callGraph/pythonCG/micro-benchmark/snippets/getEdge.py'
 	for element in `ls $1`
 	do
 		file=$1"/"$element

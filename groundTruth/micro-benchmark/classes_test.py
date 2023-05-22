@@ -1,7 +1,5 @@
-
-import os
-
 from base import TestBase
+
 
 class ClassesTest(TestBase):
     snippet_dir = "classes"
@@ -60,6 +58,7 @@ class ClassesTest(TestBase):
 
     def test_imported_nested_attr_access(self):
         self.validate_snippet(self.get_snippet_path("imported_nested_attr_access"))
+
     # todo
     def test_parameter_call(self):
         self.validate_snippet(self.get_snippet_path("parameter_call"))

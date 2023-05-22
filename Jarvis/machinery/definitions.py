@@ -1,18 +1,17 @@
-
-
 import utils
 import heapq
-import math
 from machinery import gol
+
 
 class PointItem(object):
     def __init__(self, row, values=set()):
         if isinstance(values, list):
             values = set(values)
-        elif isinstance(values,str):
+        elif isinstance(values, str):
             values = set([values])
         self.points_to = values
         self.row = row
+
     def __lt__(self, other):
         return self.row < other.row
 
@@ -21,6 +20,7 @@ class DefinitionManager(object):
     def __init__(self):
         self.defs = {}
         self.copyMap = {}
+
     def create(self, ns, def_type):
         if not ns or not isinstance(ns, str):
             raise DefinitionError("Invalid namespace argument")
@@ -32,7 +32,7 @@ class DefinitionManager(object):
 
         return self.defs[ns]
 
-    def create_by_name(self,dict_name,ns, def_type):
+    def create_by_name(self, dict_name, ns, def_type):
         if not ns or not isinstance(ns, str):
             raise DefinitionError("Invalid namespace argument")
         if def_type not in Definition.types:
@@ -43,15 +43,15 @@ class DefinitionManager(object):
 
         return self.defs[dict_name]
 
-
-    def get(self, ns) :
+    def get(self, ns):
         if ns in self.defs:
             return self.defs[ns]
         return None
 
-    def addCopy(self,copyNs,ns):
+    def addCopy(self, copyNs, ns):
         copyDefi = self.defs.get(copyNs)
         self.copyMap[copyNs] = ns
+
     def getOrCreate(self, ns, def_type):
         if not self.get(ns):
             return self.create(ns, def_type)
@@ -72,7 +72,7 @@ class DefinitionManager(object):
 
         return defi
 
-    def handle_class_def(self, parent_ns, cls_name,cls_ns):
+    def handle_class_def(self, parent_ns, cls_name, cls_ns):
         full_ns = utils.join_ns(cls_ns, cls_name)
         defi: Definition = self.get(full_ns)
         if not defi:
@@ -81,11 +81,11 @@ class DefinitionManager(object):
             defi.def_type = utils.constants.CLS_DEF
         return defi
 
-    def handle_if_def(self, parent_ns, if_name,def_type = utils.constants.IF_DEF):
+    def handle_if_def(self, parent_ns, if_name, def_type=utils.constants.IF_DEF):
         full_ns = utils.join_ns(parent_ns, if_name)
         defi = self.get(full_ns)
         if not defi:
-            defi = self.create(full_ns,def_type)
+            defi = self.create(full_ns, def_type)
         return defi
 
     def transform_defi(self, ns, row) -> list:
@@ -102,29 +102,33 @@ class DefinitionManager(object):
         if not curDefi.points:
             return [defiNs], row
         # pointItem: PointItem = curDefi.get_point(row)
-        pointValues:set() = curDefi.get_last_point_value()
+        pointValues: set() = curDefi.get_last_point_value()
         if not pointValues:
             pointValues = curDefi.get_last_point_value()
             if not pointValues:
-                return [defiNs],row
-        return pointValues,row
+                return [defiNs], row
+        return pointValues, row
 
     def get_scope_name(self, ns: str):
-        while ns.rfind('.') != -1:
-            rIndex = ns.rfind('.')
+        while ns.rfind(".") != -1:
+            rIndex = ns.rfind(".")
             scopeNs = ns[:rIndex]
-            if self.get(scopeNs) and self.get(scopeNs).get_type() in [utils.constants.MOD_DEF,
-                                                                      utils.constants.CLS_DEF,
-                                                                      utils.constants.FUN_DEF,
-                                                                      ]:
+            if self.get(scopeNs) and self.get(scopeNs).get_type() in [
+                utils.constants.MOD_DEF,
+                utils.constants.CLS_DEF,
+                utils.constants.FUN_DEF,
+            ]:
                 return scopeNs
             ns = scopeNs
 
     def get_module_name(self, ns: str):
-        while ns.rfind('.') != -1:
-            rIndex = ns.rfind('.')
+        while ns.rfind(".") != -1:
+            rIndex = ns.rfind(".")
             moduleNs = ns[:rIndex]
-            if self.get(moduleNs) and self.get(moduleNs).get_type() == utils.constants.MOD_DEF:
+            if (
+                self.get(moduleNs)
+                and self.get(moduleNs).get_type() == utils.constants.MOD_DEF
+            ):
                 return moduleNs
             ns = moduleNs
 
@@ -178,6 +182,7 @@ class Definition(object):
         self.points = []
         self.bias = set()
         self.lines = set()
+
     def get_point(self, row) -> PointItem:
         cur_point = None
         for point in self.points:
@@ -196,9 +201,9 @@ class Definition(object):
         curPoint = None
         point = PointItem(row, values)
         heapq.heappush(self.points, point)
-        if isinstance(values,str):
+        if isinstance(values, str):
             values = [values]
-        if not gol.get_value('precision'):
+        if not gol.get_value("precision"):
             self.bias = self.bias.union(set(values))
 
     def get_type(self):
@@ -221,13 +226,10 @@ class Definition(object):
     def get_ns(self):
         return self.fullns
 
-
-
     def get_last_point_value(self):
         if not self.points:
             return set()
         return self.points[len(self.points) - 1].points_to.union(self.bias)
-
 
 
 class ChangeManager:
@@ -248,16 +250,20 @@ class ChangeManager:
             # self.changes[ns].setdefault(defins, item)
             self.changes[ns][defins] = item
         else:
-            self.changes[ns].get(defins).addPoint(row,values)
+            self.changes[ns].get(defins).addPoint(row, values)
+
 
 class ChangeItem(Definition):
-    def __init__(self, row, values,if_union = False):
+    def __init__(self, row, values, if_union=False):
         self.points = []
         self.bias = set()
         self.if_union = if_union
-        self.add_value_point(row,values)
-    def addPoint(self,row,values):
-        point = PointItem(row,values)
-        heapq.heappush(self.points,point)
+        self.add_value_point(row, values)
+
+    def addPoint(self, row, values):
+        point = PointItem(row, values)
+        heapq.heappush(self.points, point)
+
+
 class DefinitionError(Exception):
     pass

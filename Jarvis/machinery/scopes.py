@@ -1,9 +1,8 @@
-
 import symtable
 
 
 import utils
-import copy
+
 
 class ScopeManager(object):
     """Manages the scope entries"""
@@ -11,11 +10,13 @@ class ScopeManager(object):
     def __init__(self):
         self.scopes = {}
         self.copySeq = {}
+
     def handle_module(self, modulename, filename, contents):
         functions = []
         classes = []
+
         def process(namespace, parent, table):
-            name = table.get_name() if table.get_name() != 'top' else ''
+            name = table.get_name() if table.get_name() != "top" else ""
             if name:
                 fullns = utils.join_ns(namespace, name)
             else:
@@ -32,7 +33,9 @@ class ScopeManager(object):
             for t in table.get_children():
                 process(fullns, sc, t)
 
-        process(modulename, None, symtable.symtable(contents, filename, compile_type="exec"))
+        process(
+            modulename, None, symtable.symtable(contents, filename, compile_type="exec")
+        )
         return {"functions": functions, "classes": classes}
 
     def add_defi(self, ns, target, defi):
@@ -44,14 +47,16 @@ class ScopeManager(object):
         scope = self.get_scope(ns)
         if scope:
             scope.add_def(target, defi)
+
     def add_params(self, ns, defi):
         scope = self.get_scope(ns)
         if scope:
             scope.add_params(defi)
+
     def get_def(self, current_ns, var_name):
         current_scope = self.get_scope(current_ns)
         while current_scope:
-            defi= current_scope.get_def(var_name)
+            defi = current_scope.get_def(var_name)
             if defi:
                 return defi
             current_scope = current_scope.parent
@@ -66,34 +71,37 @@ class ScopeManager(object):
             self.scopes[namespace] = sc
         return self.scopes[namespace]
 
-    def create_scope_by_name(self,dict_name,namespace,parent):
+    def create_scope_by_name(self, dict_name, namespace, parent):
         if not namespace in self.scopes:
             sc = ScopeItem(namespace, parent)
             self.scopes[dict_name] = sc
         return self.scopes[dict_name]
-    def add_scope(self,namespace,item,parent):
+
+    def add_scope(self, namespace, item, parent):
         if not namespace in self.scopes:
             self.scopes[namespace] = item
             item.parent = parent
+
     def get_scopes(self):
         return self.scopes
 
-    def add_seq(self,ns):
+    def add_seq(self, ns):
         if ns in self.copySeq:
             self.copySeq[ns] += 1
         else:
             self.copySeq[ns] = 1
         return self.copySeq[ns]
 
-    def get_seq(self,ns):
+    def get_seq(self, ns):
         if ns in self.copySeq:
             return self.copySeq[ns]
         return 0
 
-    def add_inputs(self,ns,*args):
+    def add_inputs(self, ns, *args):
         scope = self.get_scope(ns)
         if scope:
             scope.add_inputs(args)
+
 
 class ScopeItem(object):
     def __init__(self, fullns, parent):
@@ -113,23 +121,26 @@ class ScopeItem(object):
         self.fullns = fullns
         self.params = []
         self.inputs = set()
+
     def get_ns(self):
         return self.fullns
 
     def get_defs(self):
         return self.defs
 
-    def add_params(self,defi):
+    def add_params(self, defi):
         self.params.append(defi)
+
     def get_def(self, name):
         defs = self.get_defs()
         if name in defs:
             return defs[name]
         return None
 
-    def add_inputs(self,*args):
+    def add_inputs(self, *args):
         for i in args:
             self.inputs = self.inputs.union(i)
+
     def get_lambda_counter(self):
         return self.lambda_counter
 
@@ -157,11 +168,11 @@ class ScopeItem(object):
         self.list_counter += val
         return self.list_counter
 
-    def inc_if_counter(self,val=1):
+    def inc_if_counter(self, val=1):
         self.if_counter += val
         return self.if_counter
 
-    def inc_while_counter(self,val=1):
+    def inc_while_counter(self, val=1):
         self.while_counter += val
         return self.while_counter
 
@@ -183,15 +194,14 @@ class ScopeItem(object):
 
         self.defs[name].merge_points_to(to_merge.get_points_to())
 
-
-    def get_prefix_defi(self,prefix:str)->list:
+    def get_prefix_defi(self, prefix: str) -> list:
         defiNameList = []
         for defi in self.defs.values():
             if defi.get_ns().startswith(prefix):
                 defiNameList.append(defi)
         return defiNameList
 
-    def get_params_defiNs(self)->list:
+    def get_params_defiNs(self) -> list:
         paramsDefiList = []
         for param in self.params:
             if param.get_type() == utils.constants.NAME_DEF:
@@ -201,10 +211,11 @@ class ScopeItem(object):
 
     def __str__(self):
         def find_ns(ns):
-            for defiNs,defi in self.defs.items():
+            for defiNs, defi in self.defs.items():
                 if defi.get_ns() == ns:
                     return defi
             return None
+
         ans = self.fullns
         ans += "-"
         for param in self.params:
@@ -220,5 +231,7 @@ class ScopeItem(object):
             ans += tmp
             ans += "-"
         return ans
+
+
 class ScopeError(Exception):
     pass

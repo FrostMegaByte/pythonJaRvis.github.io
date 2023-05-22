@@ -1,4 +1,3 @@
-
 import os
 import sys
 import importlib
@@ -13,12 +12,14 @@ class TestBase(TestCase):
 
     def setUp(self):
         def error():
-            print ("Invalid module %s.%s" % (cg_mod, cg_class))
-            print ("Set environment variables `CALL_GRAPH_CLASS` and `CALL_GRAPH_MODULE` properly")
+            print("Invalid module %s.%s" % (cg_mod, cg_class))
+            print(
+                "Set environment variables `CALL_GRAPH_CLASS` and `CALL_GRAPH_MODULE` properly"
+            )
             sys.exit(1)
 
         # self.snippets_path = os.environ.get("SNIPPETS_PATH")
-        self.snippets_path = '/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets'
+        self.snippets_path = "/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets"
         # cg_class = os.environ.get('CALL_GRAPH_CLASS', None)
         # cg_mod = os.environ.get('CALL_GRAPH_MODULE', None)
         cg_class = "CallGraphGenerator"
@@ -48,14 +49,20 @@ class TestBase(TestCase):
         main_path = os.path.join(snippet_path, "main.py")
         try:
             # cg = self.cg_class([main_path], snippet_path, -1, utils.constants.CALL_GRAPH_OP)
-            cg = self.cg_class([main_path], snippet_path, -1, utils.constants.CALL_GRAPH_OP,precision = True)
+            cg = self.cg_class(
+                [main_path],
+                snippet_path,
+                -1,
+                utils.constants.CALL_GRAPH_OP,
+                precision=True,
+            )
             cg.analyze()
-            output =cg.output()
+            output = cg.output()
             output_cg = {}
             for node in output:
                 output_cg[node] = list(output[node])
-            with open(os.path.join(snippet_path,'pythonCG.json'),'w') as f:
-                json.dump(output_cg,f)
+            with open(os.path.join(snippet_path, "pythonCG.json"), "w") as f:
+                json.dump(output_cg, f)
                 # f.write(json.dumps(cg.output()))
             return output
         except Exception as e:

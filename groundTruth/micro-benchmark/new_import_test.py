@@ -1,8 +1,5 @@
-
-
-import os
-
 from base import TestBase
+
 
 class newArgsTest(TestBase):
     snippet_dir = "newCase/args"
