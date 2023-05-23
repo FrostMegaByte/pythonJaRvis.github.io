@@ -80,7 +80,7 @@ def main(base):
     global_pythoncg = list(map(lambda x: x[0] + x[1], zip(pre_python, global_pythoncg)))
 
 
-SNIPPETS_PATH = "/Users/yixuanyan/yyx/github/supplychain/YanYixuan/pythonCG/micro-benchmark/snippets"
+SNIPPETS_PATH = "D:\Documents\TU Delft\Year 6\Master's Thesis\pythonJaRvis.github.io\groundTruth\micro-benchmark\snippets"
 entries = [
     f"{SNIPPETS_PATH}/assignments",
     f"{SNIPPETS_PATH}/builtins",

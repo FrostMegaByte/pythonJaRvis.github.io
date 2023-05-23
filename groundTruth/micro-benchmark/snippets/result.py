@@ -99,7 +99,7 @@ def main(index, base):
     def save_xlsx(index, name, res):
         from openpyxl import load_workbook
 
-        filename = "D:/Documents/TU Delft/Year 6/Master's Thesis/Jarvis/groundTruth/micro-benchmark/snippets/micro.xlsx"
+        filename = "D:\Documents\TU Delft\Year 6\Master's Thesis\pythonJaRvis.github.io\groundTruth\micro-benchmark\snippets\micro.xlsx"
         wb = load_workbook(filename=filename)
         sheet = wb["Sheet1"]
         tmprow = index
@@ -137,7 +137,7 @@ def main(index, base):
     global_pythoncg = list(map(lambda x: x[0] + x[1], zip(pre_python, global_pythoncg)))
 
 
-SNIPPETS_PATH = "D:/Documents/TU Delft/Year 6/Master's Thesis/Jarvis/groundTruth/micro-benchmark/snippets"
+SNIPPETS_PATH = "D:\Documents\TU Delft\Year 6\Master's Thesis\pythonJaRvis.github.io\groundTruth\micro-benchmark\snippets"
 entries = [
     f"{SNIPPETS_PATH}/assignments",
     f"{SNIPPETS_PATH}/builtins",
