@@ -1,5 +1,3 @@
 {
-    "main": [
-        "main.Cls2.__init__"
-    ]
+  "main": ["main.Cls2.__init__"]
 }

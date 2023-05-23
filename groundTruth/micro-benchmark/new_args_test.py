@@ -1,7 +1,7 @@
 from base import TestBase
 
 
-class newArgsTest(TestBase):
+class NewArgsTest(TestBase):
     snippet_dir = "newCase/args"
 
     def test_assign_return(self):

@@ -1,6 +1,7 @@
 def dec(f):
     return f
 
+
 def func():
     def dec(f):
         return f
@@ -10,4 +11,6 @@ def func():
         pass
 
     inner()
+
+
 func()

@@ -1,8 +1,10 @@
 class C:
     def __init__(self) -> None:
         pass
+
     def func(self):
         pass
+
 
 class B:
     def __init__(self, c):
@@ -10,6 +12,7 @@ class B:
 
     def func(self):
         self.c.func()
+
 
 class A:
     def __init__(self):
@@ -19,6 +22,6 @@ class A:
         b = B(self.c)
         b.func()
 
+
 a = A()
 a.func()
-                                                                                                                                                                                                                                                                                                                                                                                                                                                   

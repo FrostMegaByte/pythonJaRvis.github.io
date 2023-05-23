@@ -2,6 +2,7 @@
 # @Author : yixuanYan
 # from insider import A , B,C,D,E
 from insider import *
+
 if True:
     a = A
     a()
@@ -14,9 +15,7 @@ else:
             a()
         else:
             if True:
-              a = D
-              a()
+                a = D
+                a()
             else:
                 a = E
-
-
