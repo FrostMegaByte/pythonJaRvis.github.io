@@ -1,5 +1,3 @@
 {
-    "main": [
-        "main.func2"
-    ]
+  "main": ["main.func2"]
 }

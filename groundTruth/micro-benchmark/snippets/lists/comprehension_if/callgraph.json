@@ -1,1 +1,5 @@
-{"main": ["<builtin>.range", "main.func"], "main.func": [], "<builtin>.range": []}
+{
+  "main": ["<builtin>.range", "main.func"],
+  "main.func": [],
+  "<builtin>.range": []
+}
