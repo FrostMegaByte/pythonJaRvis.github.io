@@ -2,6 +2,9 @@ import os
 import sys
 import importlib
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from unittest import TestCase, main
 import Jarvis.utils as utils
@@ -9,7 +12,7 @@ import Jarvis.utils as utils
 
 class TestBase(TestCase):
     snippet_dir = ""
-    snippets_path = "D:\Documents\TU Delft\Year 6\Master's Thesis\Jarvis\groundTruth\micro-benchmark\snippets"
+    snippets_path = os.environ.get("SNIPPETS_PATH")
 
     # def setUp(self):
     #     def error():

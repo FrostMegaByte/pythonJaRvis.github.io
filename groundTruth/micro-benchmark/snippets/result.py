@@ -1,5 +1,8 @@
 import os
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def run(truth, pycg, pythoncg):
@@ -137,7 +140,7 @@ def main(index, base):
     global_pythoncg = list(map(lambda x: x[0] + x[1], zip(pre_python, global_pythoncg)))
 
 
-SNIPPETS_PATH = "D:\Documents\TU Delft\Year 6\Master's Thesis\pythonJaRvis.github.io\groundTruth\micro-benchmark\snippets"
+SNIPPETS_PATH = os.environ.get("SNIPPETS_PATH")
 entries = [
     f"{SNIPPETS_PATH}/assignments",
     f"{SNIPPETS_PATH}/builtins",
