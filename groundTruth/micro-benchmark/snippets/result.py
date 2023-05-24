@@ -102,7 +102,7 @@ def main(index, base):
     def save_xlsx(index, name, res):
         from openpyxl import load_workbook
 
-        filename = "D:\Documents\TU Delft\Year 6\Master's Thesis\pythonJaRvis.github.io\groundTruth\micro-benchmark\snippets\micro.xlsx"
+        filename = os.environ.get("SNIPPETS_PATH") + "/micro.xlsx"
         wb = load_workbook(filename=filename)
         sheet = wb["Sheet1"]
         tmprow = index
