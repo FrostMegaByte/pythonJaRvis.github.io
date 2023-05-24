@@ -3,17 +3,18 @@
 # File Name:    test_edge.sh
 #########################################################################
 
-start_pycg () {
-  entry="/Users/yixuanyan/yyx/github/supplychain/callGraph/pythonCG/micro-benchmark/snippets/getEdge.py"
+start_callgraph_generator () {
+  entry=$(cd "$snippets_path" ; cd "../../../Jarvis" ; pwd -P)"/main.py"
+
 	for element in $(ls "$1")
 	do
 		file=$1"/"$element
 		if [ -d "$file" ]
 		then
-			start_pycg "$file"
-		elif [ "${file##*.}"x = "py"x ]
+			start_callgraph_generator "$file"
+		elif [ "${file##*.}" = "py" ]
 		then
-			if [ "${file##*/}"x = 'main.py'x ]
+			if [ "${file##*/}" = 'main.py' ]
 			then
 			  curDir_pycg="${file%/*}/test_pycg.json"
 				curDir_pythonCG="${file%/*}/test_pythonCG.json"
@@ -28,5 +29,6 @@ start_pycg () {
 	done
 }
 
-path="/Users/yixuanyan/yyx/github/supplychain/callGraph/pythonCG/micro-benchmark/snippets"
-start_pycg $path
+# The snippets_path variable is related to the position of this script. This script should thus be in the snippets directory (which is the default).
+snippets_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P)
+start_callgraph_generator "$snippets_path"
