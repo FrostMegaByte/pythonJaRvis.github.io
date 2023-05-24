@@ -9,3 +9,7 @@
 _site
 .sass-cache
 .jekyll-metadata
+.bundle
+
+*endor*
+*pyright*
