@@ -122,7 +122,6 @@ def main(index, base):
         for j, tmp in enumerate(res[4:]):
             tmpcol = col + j
             sheet.cell(tmprow, tmpcol, value=tmp)
-        print()
         wb.save(filename)
 
     global global_pycg
@@ -140,7 +139,7 @@ def main(index, base):
     res = pre_pycg + pre_python
     save_xlsx(3 + index, base.split(os.path.sep)[-1], res)
     print(base.split(os.path.sep)[-1])
-    print(pycg_str, python_str)
+    print(f"{pycg_str} - {python_str}\n")
     global_pycg = list(map(lambda x: x[0] + x[1], zip(pre_pycg, global_pycg)))
     global_pythoncg = list(map(lambda x: x[0] + x[1], zip(pre_python, global_pythoncg)))
 
@@ -174,6 +173,8 @@ entries = [
 if __name__ == "__main__":
     for index, entry in enumerate(entries):
         main(index, entry)
+
+    print("Final:")
     print(global_pycg, global_pythoncg)
 
 # complete 不包含没有调用的边
