@@ -25,12 +25,12 @@ start_callgraph_generator () {
 				# pycg "$file" --package "${file%/*}" -o "$curDir_pycg"
 
 				# Normal pythoncg/Jarvis usage (uncomment the following line 2 lines)
-				# curDir_pythonCG="${file%/*}/pythonCG.json"
-				# python3 "$entry" "$file" --package "${file%/*}" -o "$curDir_pythonCG"
+				curDir_pythonCG="${file%/*}/pythonCG-test-script.json"
+				python3 "$entry" "$file" --package "${file%/*}" -o "$curDir_pythonCG"
 
 				# Timing PyCG and pythoncg/Jarvis in a log file
-				/usr/bin/time -lp pycg "$file" --package "${file%/*}" > "${file%/*}/pycg.log" 2>&1
-				/usr/bin/time -lp python3 "$entry" "$file" --package "${file%/*}" > "${file%/*}/pythoncg.log" 2>&1
+				# /usr/bin/time -lp pycg "$file" --package "${file%/*}" > "${file%/*}/pycg.log" 2>&1
+				# /usr/bin/time -lp python3 "$entry" "$file" --package "${file%/*}" > "${file%/*}/pythoncg.log" 2>&1
 			fi
 		fi
 	done
