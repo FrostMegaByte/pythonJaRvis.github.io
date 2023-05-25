@@ -91,7 +91,7 @@ def findFile(base):
                 fullname = os.path.join(root, f)
                 returnList[2] = fullname
         yield run(returnList[0], returnList[1], returnList[2])
-        yield getMem(returnList[0], returnList[1])
+        # yield getMem(returnList[0], returnList[1])
 
 
 global_pycg = [0, 0, 0, 0]
@@ -105,20 +105,25 @@ def main(index, base):
         filename = os.environ.get("SNIPPETS_PATH") + "/micro.xlsx"
         wb = load_workbook(filename=filename)
         sheet = wb["Sheet1"]
+
+        sheet.cell(1, 3, "PyCG")
+        sheet.cell(1, 8, "Jarvis")
+
+        for i, value in enumerate(["TP", "FP", "FN", "edges", ""] * 2):
+            sheet.cell(2, i + 3, value)
+
         tmprow = index
+        sheet.cell(tmprow, 1, value=name)
         col = 3
         for j, tmp in enumerate(res[:4]):
             tmpcol = col + j
             sheet.cell(tmprow, tmpcol, value=tmp)
-        print()
-        sheet.cell(tmprow, 1, value=name)
-        col = 7
+        col = 8
         for j, tmp in enumerate(res[4:]):
             tmpcol = col + j
             sheet.cell(tmprow, tmpcol, value=tmp)
         print()
         wb.save(filename)
-        pass
 
     global global_pycg
     global global_pythoncg
@@ -133,7 +138,7 @@ def main(index, base):
     pycg_str = "{},{},{}/{}".format(*pre_pycg)
     python_str = "{},{},{}/{}".format(*pre_python)
     res = pre_pycg + pre_python
-    save_xlsx(5 + index, base.split(os.path.sep)[-1], res)
+    save_xlsx(3 + index, base.split(os.path.sep)[-1], res)
     print(base.split(os.path.sep)[-1])
     print(pycg_str, python_str)
     global_pycg = list(map(lambda x: x[0] + x[1], zip(pre_pycg, global_pycg)))
