@@ -18,7 +18,7 @@ start_callgraph_generator () {
 			start_callgraph_generator "$file"
 		elif [ "${file##*.}" = "py" ]
 		then
-			if [ "${file##*/}" = 'main.py' ]
+			if [ "${file##*/}" = "main.py" ]
 			then
 				# Normal PyCG usage (uncomment the following line 2 lines)
 				# curDir_pycg="${file%/*}/pycg.json"

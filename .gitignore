@@ -116,5 +116,6 @@ _site
 .sass-cache
 .jekyll-metadata
 .bundle
+**/*.xlsx
 *endor*
 *pyright*
