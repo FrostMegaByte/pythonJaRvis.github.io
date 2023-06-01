@@ -146,6 +146,7 @@ def main(index, base):
 
 SNIPPETS_PATH = os.environ.get("SNIPPETS_PATH")
 entries = [
+    f"{SNIPPETS_PATH}/args",
     f"{SNIPPETS_PATH}/assignments",
     f"{SNIPPETS_PATH}/builtins",
     f"{SNIPPETS_PATH}/classes",
@@ -153,6 +154,7 @@ entries = [
     f"{SNIPPETS_PATH}/dicts",
     f"{SNIPPETS_PATH}/direct_calls",
     f"{SNIPPETS_PATH}/exceptions",
+    f"{SNIPPETS_PATH}/external",
     f"{SNIPPETS_PATH}/functions",
     f"{SNIPPETS_PATH}/generators",
     f"{SNIPPETS_PATH}/imports",
@@ -160,7 +162,6 @@ entries = [
     f"{SNIPPETS_PATH}/lambdas",
     f"{SNIPPETS_PATH}/lists",
     f"{SNIPPETS_PATH}/mro",
-    f"{SNIPPETS_PATH}/args",
     f"{SNIPPETS_PATH}/returns",
     # New cases
     f"{SNIPPETS_PATH}/newCase/args",
